@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    dataBinding {
+        enabled = true
+    }
+
+    //加入compileOptions,这会让IDE使用用JAVA8语法解析
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //指定将源码编译的级别,，使用下列代码，会将代码编译到兼容1.6的字节码格式
+    retrolambda {
+        javaVersion JavaVersion.VERSION_1_6
+    }
+
+    defaultConfig {
+        applicationId "com.gosuncn.cu"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true // dex突破65535的限制
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    //解决meta-inf冲突
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile project(':lib_common')
+    // dagger2
+    apt 'com.google.dagger:dagger-compiler:2.4' // dagger2
+
+    compile 'com.google.dagger:dagger:2.4'
+    compile 'com.android.support:support-v4:24.0.0'
+}

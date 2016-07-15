@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AndroidUtils</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="common_hint_unable_to_initialize">sorry,this cannot be instantiated</string>
+    <string name="title_activity_sweet_alert">SweetAlertActivity</string>
+    <string name="title_activity_jackson">JacksonActivity</string>
+    <string name="title_activity_volley">VolleyActivity</string>
+    <string name="title_activity_orm_lite">OrmLiteActivity</string>
+</resources>
