@@ -7,6 +7,7 @@ import android.widget.Toast;
  * Toast工具类
  * 
  */
+@Deprecated
 public class ToastUtil {
 
 	private ToastUtil() {

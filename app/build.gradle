@@ -49,9 +49,11 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':lib_common')
+    //compile 'com.github.huweijian5:CommonUtil2:2.0.0'
     // dagger2
     apt 'com.google.dagger:dagger-compiler:2.4' // dagger2
 
     compile 'com.google.dagger:dagger:2.4'
     compile 'com.android.support:support-v4:24.0.0'
+
 }
