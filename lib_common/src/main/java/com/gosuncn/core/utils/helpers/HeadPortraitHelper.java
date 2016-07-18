@@ -13,13 +13,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.Toast;
-
-import com.gosuncn.core.event.CommonEvent;
-import com.gosuncn.core.event.IEvent;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,30 +26,47 @@ import java.io.FileNotFoundException;
  */
 public class HeadPortraitHelper {
 
+    interface HeadPortraitCropResultListener {
+        /**
+         * 头像裁剪结果
+         *
+         * @param isSuccess 是否成功
+         * @param bitmap    裁剪成功后的头像
+         */
+        void headPortraitCropResult(boolean isSuccess, Bitmap bitmap);
+    }
+
     //保存图片本地路径
     public static final String ACCOUNT_DIR = Environment.getExternalStorageDirectory().getPath()
             + "/account/";
     public static final String ACCOUNT_MAINTRANCE_ICON_CACHE = "icon_cache/";
-    private static  String IMGPATH = ACCOUNT_DIR + ACCOUNT_MAINTRANCE_ICON_CACHE;
+    private static String IMGPATH = ACCOUNT_DIR + ACCOUNT_MAINTRANCE_ICON_CACHE;
 
-    private static  String IMAGE_FILE_NAME = "faceImage.jpeg";
-    private static  String TMP_IMAGE_FILE_NAME = "tmp_faceImage.jpeg";
+    private static String IMAGE_FILE_NAME = "faceImage.jpeg";
+    private static String TMP_IMAGE_FILE_NAME = "tmp_faceImage.jpeg";
 
     //常量定义
-    /** 拍照*/
+    /**
+     * 拍照
+     */
     public static final int TAKE_A_PICTURE = 10;
-    /** 选择*/
+    /**
+     * 选择
+     */
     public static final int SELECT_A_PICTURE = 20;
-    /** 裁剪*/
+    /**
+     * 裁剪
+     */
     public static final int SET_PICTURE = 30;
-    /** 裁剪（kitkat之前）*/
+    /**
+     * 裁剪（kitkat之前）
+     */
     public static final int SET_ALBUM_PICTURE_KITKAT = 40;
-    /** 选择（kitkat之后）*/
+    /**
+     * 选择（kitkat之后）
+     */
     public static final int SELECET_A_PICTURE_AFTER_KITKAT = 50;
     private String mAlbumPicturePath = null;
-
-    File fileone = null;
-    File filetwo = null;
 
     //版本比较：是否是4.4及以上版本
     final boolean mIsKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -63,16 +74,32 @@ public class HeadPortraitHelper {
     private Activity context;
     private int width = 200;
     private int height = 200;
+    private HeadPortraitCropResultListener listener;
 
     public HeadPortraitHelper(Activity context) {
-
         this.context = context;
     }
+
+    /**
+     * 构造函数
+     *
+     * @param context
+     * @param dir     头像保存目录
+     */
     public HeadPortraitHelper(Activity context, String dir) {
         this(context);
         this.IMGPATH = dir;
-
     }
+
+    /**
+     * 设置头像裁剪结果监听器
+     *
+     * @param listener
+     */
+    public void setHeadPortraitCropResultListener(HeadPortraitCropResultListener listener) {
+        this.listener = listener;
+    }
+
 
     /**
      * 设置裁剪图片的宽高，默认为200*200
@@ -85,6 +112,9 @@ public class HeadPortraitHelper {
         this.height = height;
     }
 
+    /**
+     * 调用系统拍照
+     */
     public void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,
@@ -93,18 +123,22 @@ public class HeadPortraitHelper {
     }
 
     /**
+     * 调用系统拍照
      *
-     * @param picName 照片名称（jpeg）
+     * @param picName 图片名称
      */
     public void takePhoto(String picName) {
-        this.IMAGE_FILE_NAME=picName;
-        this.TMP_IMAGE_FILE_NAME="tmp_"+picName;
+        this.IMAGE_FILE_NAME = picName;
+        this.TMP_IMAGE_FILE_NAME = "tmp_" + picName;
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,
                 Uri.fromFile(new File(IMGPATH, IMAGE_FILE_NAME)));
         context.startActivityForResult(intent, TAKE_A_PICTURE);
     }
 
+    /**
+     * 打开系统相册
+     */
     public void openAlbum() {
         if (mIsKitKat) {
             selectImageUriAfterKikat();
@@ -113,72 +147,80 @@ public class HeadPortraitHelper {
         }
     }
 
-
     /**
      * 需要在相应的Activity中的onActivityResult中调用
+     *
      * @param requestCode
      * @param resultCode
      * @param data
      */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        switch(requestCode){
+        switch (requestCode) {
             case SELECT_A_PICTURE:
                 if (resultCode == context.RESULT_OK && null != data) {
                     //				Log.i("zou", "4.4以下的");
                     Bitmap bitmap = decodeUriAsBitmap(Uri.fromFile(new File(IMGPATH,
                             TMP_IMAGE_FILE_NAME)));
-                    EventBus.getDefault().post(new CommonEvent<Bitmap>(IEvent.CROP_SUCCESS, bitmap));
-                    //mAcountHeadIcon.setImageBitmap(bitmap);
+                    if (listener != null) {
+                        if (bitmap != null) {
+                            listener.headPortraitCropResult(true, bitmap);
+                        } else {
+                            listener.headPortraitCropResult(false, bitmap);
+                        }
+                    }
                 } else if (resultCode == context.RESULT_CANCELED) {
                     Toast.makeText(context, "取消头像设置", Toast.LENGTH_SHORT).show();
                 }
-            break;
+                break;
             case SELECET_A_PICTURE_AFTER_KITKAT:
                 if (resultCode == context.RESULT_OK && null != data) {
-//				Log.i("zou", "4.4以上的");
                     mAlbumPicturePath = getPath(context.getApplicationContext(), data.getData());
                     cropImageUriAfterKikat(Uri.fromFile(new File(mAlbumPicturePath)));
                 } else if (resultCode == context.RESULT_CANCELED) {
                     Toast.makeText(context, "取消头像设置", Toast.LENGTH_SHORT).show();
                 }
-            break;
+                break;
             case SET_ALBUM_PICTURE_KITKAT:
-                Log.i("zou", "4.4以上上的 RESULT_OK");
-
                 Bitmap bitmap = decodeUriAsBitmap(Uri.fromFile(new File(IMGPATH, TMP_IMAGE_FILE_NAME)));
-                //mAcountHeadIcon.setImageBitmap(bitmap);
-                EventBus.getDefault().post(new CommonEvent<Bitmap>(IEvent.CROP_SUCCESS, bitmap));
-            break;
+                if (listener != null) {
+                    if (bitmap != null) {
+                        listener.headPortraitCropResult(true, bitmap);
+                    } else {
+                        listener.headPortraitCropResult(false, bitmap);
+                    }
+                }
+                break;
             case TAKE_A_PICTURE:
-                Log.i("zou", "TAKE_A_PICTURE-resultCode:" + resultCode);
                 if (resultCode == context.RESULT_OK) {
                     cameraCropImageUri(Uri.fromFile(new File(IMGPATH, IMAGE_FILE_NAME)));
                 } else {
                     Toast.makeText(context, "取消头像设置", Toast.LENGTH_SHORT).show();
                 }
-            break;
+                break;
             case SET_PICTURE:
                 Bitmap bitmap1 = null;
                 if (resultCode == context.RESULT_OK && null != data) {
                     bitmap1 = decodeUriAsBitmap(Uri.fromFile(new File(IMGPATH, IMAGE_FILE_NAME)));
-                    //mAcountHeadIcon.setImageBitmap(bitmap);
-                    EventBus.getDefault().post(new CommonEvent<Bitmap>(IEvent.CROP_SUCCESS, bitmap1));
+                    if (listener != null) {
+                        if (bitmap1 != null) {
+                            listener.headPortraitCropResult(true, bitmap1);
+                        } else {
+                            listener.headPortraitCropResult(false, bitmap1);
+                        }
+                    }
                 } else if (resultCode == context.RESULT_CANCELED) {
                     Toast.makeText(context, "取消头像设置", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "设置头像失败", Toast.LENGTH_SHORT).show();
+                    if (listener != null) {
+                        listener.headPortraitCropResult(false, bitmap1);
+                    }
                 }
                 break;
         }
-
     }
 
-
     /**
-     * <br>功能简述:裁剪图片方法实现---------------------- 相册
-     * <br>功能详细描述:
-     * <br>注意:
+     * 裁剪图片
      */
     private void cropImageUri() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
@@ -197,12 +239,6 @@ public class HeadPortraitHelper {
         context.startActivityForResult(intent, SELECT_A_PICTURE);
     }
 
-
-    /**
-     * <br>功能简述:4.4以上裁剪图片方法实现---------------------- 相册
-     * <br>功能详细描述:
-     * <br>注意:
-     */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void selectImageUriAfterKikat() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -212,9 +248,7 @@ public class HeadPortraitHelper {
     }
 
     /**
-     * <br>功能简述:裁剪图片方法实现----------------------相机
-     * <br>功能详细描述:
-     * <br>注意:
+     * 裁剪图片
      *
      * @param uri
      */
@@ -227,25 +261,13 @@ public class HeadPortraitHelper {
         intent.putExtra("outputX", width);
         intent.putExtra("outputY", height);
         intent.putExtra("scale", true);
-        //		if (mIsKitKat) {
-        //			intent.putExtra("return-data", true);
-        //			intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        //		} else {
         intent.putExtra("return-data", false);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        //		}
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         intent.putExtra("noFaceDetection", true);
         context.startActivityForResult(intent, SET_PICTURE);
     }
 
-    /**
-     * <br>功能简述: 4.4及以上改动版裁剪图片方法实现 --------------------相机
-     * <br>功能详细描述:
-     * <br>注意:
-     *
-     * @param uri
-     */
     private void cropImageUriAfterKikat(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/jpeg");
@@ -264,14 +286,7 @@ public class HeadPortraitHelper {
         context.startActivityForResult(intent, SET_ALBUM_PICTURE_KITKAT);
     }
 
-    /**
-     * <br>功能简述:
-     * <br>功能详细描述:
-     * <br>注意:
-     *
-     * @param uri
-     * @return
-     */
+
     private Bitmap decodeUriAsBitmap(Uri uri) {
         Bitmap bitmap = null;
         try {
@@ -284,16 +299,14 @@ public class HeadPortraitHelper {
     }
 
     /**
-     * <br>功能简述:4.4及以上获取图片的方法
-     * <br>功能详细描述:
-     * <br>注意:
+     * 4.4及以上获取图片的路径
      *
      * @param context
      * @param uri
      * @return
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static String getPath(final Context context, final Uri uri) {
+    private String getPath(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
@@ -356,9 +369,8 @@ public class HeadPortraitHelper {
         return null;
     }
 
-    public static String getDataColumn(Context context, Uri uri, String selection,
-                                       String[] selectionArgs) {
-
+    private String getDataColumn(Context context, Uri uri, String selection,
+                                 String[] selectionArgs) {
         Cursor cursor = null;
         final String column = "_data";
         final String[] projection = {column};
@@ -381,7 +393,7 @@ public class HeadPortraitHelper {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
-    public static boolean isExternalStorageDocument(Uri uri) {
+    private boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
 
@@ -389,7 +401,7 @@ public class HeadPortraitHelper {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
-    public static boolean isDownloadsDocument(Uri uri) {
+    private boolean isDownloadsDocument(Uri uri) {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
@@ -397,7 +409,7 @@ public class HeadPortraitHelper {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
-    public static boolean isMediaDocument(Uri uri) {
+    private boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
 
@@ -405,7 +417,7 @@ public class HeadPortraitHelper {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is Google Photos.
      */
-    public static boolean isGooglePhotosUri(Uri uri) {
+    private boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 

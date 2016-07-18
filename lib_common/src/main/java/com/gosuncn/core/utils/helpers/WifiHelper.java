@@ -30,6 +30,7 @@ public class WifiHelper {
 
     /**
      * 打开WiFi
+     *
      * @return
      */
     public boolean openWifi() {
@@ -42,6 +43,7 @@ public class WifiHelper {
 
     /**
      * 关闭wifi
+     *
      * @return
      */
     public boolean closeWifi() {
@@ -54,6 +56,7 @@ public class WifiHelper {
 
     /**
      * 扫描wifi
+     *
      * @return
      */
     public List<ScanResult> wifiScanResult() {
@@ -67,9 +70,10 @@ public class WifiHelper {
 
     /**
      * 连接wifi
-     * @param SSID
-     * @param password
-     * @param type WIFICIPHER_NOPASS WIFICIPHER_WEP WIFICIPHER_WPA
+     *
+     * @param SSID     wifi名称
+     * @param password 密码
+     * @param type     WIFICIPHER_NOPASS WIFICIPHER_WEP WIFICIPHER_WPA
      * @return
      */
     public boolean wifiConnect(String SSID, String password, int type) {
@@ -100,6 +104,7 @@ public class WifiHelper {
 
     /**
      * 断开指定wifi连接
+     *
      * @param netId
      */
     public void disConnectionWifi(int netId) {

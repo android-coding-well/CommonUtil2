@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class MathUtil {
 
   /**
-   * 四舍五入.
+   * 四舍五入
    *
    * @param number  原数
    * @param decimal 保留几位小数
@@ -106,9 +106,7 @@ public class MathUtil {
 	
 	
 	/**
-	 *  
-	 * 一维数组转为二维数组 
-	 *  
+	 * 一维数组转为二维数组
 	 *
 	 * @param m the m
 	 * @param width the width

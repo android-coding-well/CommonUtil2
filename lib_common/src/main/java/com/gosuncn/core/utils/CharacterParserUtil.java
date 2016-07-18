@@ -12,7 +12,7 @@ package com.gosuncn.core.utils;
  *
  */
 public class CharacterParserUtil {
-	private static int[] pyvalue = new int[] { -20319, -20317, -20304, -20295,
+	private final static int[] pyvalue = new int[] { -20319, -20317, -20304, -20295,
 			-20292, -20283, -20265, -20257, -20242, -20230, -20051, -20036,
 			-20032, -20026, -20002, -19990, -19986, -19982, -19976, -19805,
 			-19784, -19775, -19774, -19763, -19756, -19751, -19746, -19741,
@@ -62,7 +62,7 @@ public class CharacterParserUtil {
 			-10815, -10800, -10790, -10780, -10764, -10587, -10544, -10533,
 			-10519, -10331, -10329, -10328, -10322, -10315, -10309, -10307,
 			-10296, -10281, -10274, -10270, -10262, -10260, -10256, -10254 };
-	public static String[] pystr = new String[] { "a", "ai", "an", "ang", "ao",
+	private final static String[] pystr = new String[] { "a", "ai", "an", "ang", "ao",
 			"ba", "bai", "ban", "bang", "bao", "bei", "ben", "beng", "bi",
 			"bian", "biao", "bie", "bin", "bing", "bo", "bu", "ca", "cai",
 			"can", "cang", "cao", "ce", "ceng", "cha", "chai", "chan", "chang",
@@ -107,29 +107,7 @@ public class CharacterParserUtil {
 			"zhao", "zhe", "zhen", "zheng", "zhi", "zhong", "zhou", "zhu",
 			"zhua", "zhuai", "zhuan", "zhuang", "zhui", "zhun", "zhuo", "zi",
 			"zong", "zou", "zu", "zuan", "zui", "zun", "zuo" };
-	private StringBuilder buffer;
-	private String resource;
-	private static CharacterParserUtil characterParser = new CharacterParserUtil();
 
-	public static CharacterParserUtil getInstance() {
-		return characterParser;
-	}
-
-	/**
-	 * 获得原始字符串
-	 * @return
-	 */
-	public String getResource() {
-		return resource;
-	}
-
-	/**
-	 * 设置原始字符串 
-	 * @param resource
-	 */
-	public void setResource(String resource) {
-		this.resource = resource;
-	}
 
 	/**
 	 * 汉字转成ASCII码
@@ -137,7 +115,7 @@ public class CharacterParserUtil {
 	 * @param chs
 	 * @return
 	 */
-	private int getChsAscii(String chs) {
+	public static int getChsAscii(String chs) {
 		int asc = 0;
 		try {
 			byte[] bytes = chs.getBytes("gb2312");
@@ -166,7 +144,7 @@ public class CharacterParserUtil {
 	 * @param str
 	 * @return 字符拼音
 	 */
-	public String convert(String str) {
+	public static String convert(String str) {
 		String result = null;
 		int ascii = getChsAscii(str);
 		if (ascii > 0 && ascii < 160) {
@@ -188,9 +166,9 @@ public class CharacterParserUtil {
 	 * @param chs
 	 * @return 字符拼音
 	 */
-	public String getSpelling(String chs) {
+	public static String getSpelling(String chs) {
 		String key, value;
-		buffer = new StringBuilder();
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < chs.length(); i++) {
 			key = chs.substring(i, i + 1);
 			if (key.getBytes().length >= 2) {
@@ -206,8 +184,5 @@ public class CharacterParserUtil {
 		return buffer.toString();
 	}
 
-	public String getSpelling() {
-		return this.getSpelling(this.getResource());
-	}
 
 }

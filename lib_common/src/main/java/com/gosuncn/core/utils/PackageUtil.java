@@ -1,8 +1,5 @@
 package com.gosuncn.core.utils;
 
-import java.io.File;
-import java.util.List;
-
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
@@ -18,6 +15,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.gosuncn.core.utils.ShellUtil.CommandResult;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * PackageUtils
@@ -58,21 +58,16 @@ public class PackageUtil {
     }
 
     /**
-     * App installation location settings values, same to {@link #PackageHelper}
+     * App installation location settings values
      */
     public static final int APP_INSTALL_AUTO     = 0;
     public static final int APP_INSTALL_INTERNAL = 1;
     public static final int APP_INSTALL_EXTERNAL = 2;
 
     /**
-     * install according conditions
-     * <ul>
-     * <li>if system application or rooted, see {@link #installSilent(Context, String)}</li>
-     * <li>else see {@link #installNormal(Context, String)}</li>
-     * </ul>
-     * 
+     * 安装
      * @param context
-     * @param filePath
+     * @param filePath  文件路径
      * @return
      */
     public static final int install(Context context, String filePath) {
@@ -83,11 +78,10 @@ public class PackageUtil {
     }
 
     /**
-     * install package normal by system intent
-     * 
+     * 普通安装
      * @param context
-     * @param filePath file path of package
-     * @return whether apk exist
+     * @param filePath
+     * @return
      */
     public static boolean installNormal(Context context, String filePath) {
         Intent i = new Intent(Intent.ACTION_VIEW);
@@ -95,7 +89,6 @@ public class PackageUtil {
         if (file == null || !file.exists() || !file.isFile() || file.length() <= 0) {
             return false;
         }
-
         i.setDataAndType(Uri.parse("file://" + filePath), "application/vnd.android.package-archive");
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
@@ -103,39 +96,25 @@ public class PackageUtil {
     }
 
     /**
-     * install package silent by root
-     * <ul>
-     * <strong>Attentions:</strong>
-     * <li>Don't call this on the ui thread, it may costs some times.</li>
-     * <li>You should add <strong>android.permission.INSTALL_PACKAGES</strong> in manifest, so no need to request root
-     * permission, if you are system app.</li>
-     * <li>Default pm install params is "-r".</li>
-     * </ul>
-     * 
+     * 静默安装<br/>
+     * 不要在主线程调用<br/>
+     * 需要权限：android.permission.INSTALL_PACKAGES
      * @param context
-     * @param filePath file path of package
-     * @return {@link PackageUtil#INSTALL_SUCCEEDED} means install success, other means failed. details see
-     *         {@link PackageUtil}.INSTALL_FAILED_*. same to {@link PackageManager}.INSTALL_*
-     * @see #installSilent(Context, String, String)
+     * @param filePath
+     * @return
      */
     public static int installSilent(Context context, String filePath) {
         return installSilent(context, filePath, " -r " + getInstallLocationParams());
     }
 
     /**
-     * install package silent by root
-     * <ul>
-     * <strong>Attentions:</strong>
-     * <li>Don't call this on the ui thread, it may costs some times.</li>
-     * <li>You should add <strong>android.permission.INSTALL_PACKAGES</strong> in manifest, so no need to request root
-     * permission, if you are system app.</li>
-     * </ul>
-     * 
+     * 通过root静默安装
+     * 不要在主线程调用<br/>
+     * 需要权限：android.permission.INSTALL_PACKAGES
      * @param context
-     * @param filePath file path of package
-     * @param pmParams pm install params
-     * @return {@link PackageUtil#INSTALL_SUCCEEDED} means install success, other means failed. details see
-     *         {@link PackageUtil}.INSTALL_FAILED_*. same to {@link PackageManager}.INSTALL_*
+     * @param filePath
+     * @param pmParams
+     * @return
      */
     public static int installSilent(Context context, String filePath, String pmParams) {
         if (filePath == null || filePath.length() == 0) {
@@ -274,15 +253,9 @@ public class PackageUtil {
     }
 
     /**
-     * uninstall according conditions
-     * <ul>
-     * <li>if system application or rooted, see {@link #uninstallSilent(Context, String)}</li>
-     * <li>else see {@link #uninstallNormal(Context, String)}</li>
-     * </ul>
-     * 
+     * 卸载
      * @param context
-     * @param packageName package name of app
-     * @return whether package name is empty
+     * @param packageName
      * @return
      */
     public static final int uninstall(Context context, String packageName) {
@@ -293,11 +266,10 @@ public class PackageUtil {
     }
 
     /**
-     * uninstall package normal by system intent
-     * 
+     * 普通卸载
      * @param context
-     * @param packageName package name of app
-     * @return whether package name is empty
+     * @param packageName
+     * @return
      */
     public static boolean uninstallNormal(Context context, String packageName) {
         if (packageName == null || packageName.length() == 0) {
@@ -311,35 +283,23 @@ public class PackageUtil {
         return true;
     }
 
+
     /**
-     * uninstall package and clear data of app silent by root
-     * 
+     * 通过root静默卸载以及清除数据
      * @param context
-     * @param packageName package name of app
+     * @param packageName
      * @return
-     * @see #uninstallSilent(Context, String, boolean)
      */
     public static int uninstallSilent(Context context, String packageName) {
         return uninstallSilent(context, packageName, true);
     }
 
     /**
-     * uninstall package silent by root
-     * <ul>
-     * <strong>Attentions:</strong>
-     * <li>Don't call this on the ui thread, it may costs some times.</li>
-     * <li>You should add <strong>android.permission.DELETE_PACKAGES</strong> in manifest, so no need to request root
-     * permission, if you are system app.</li>
-     * </ul>
-     * 
-     * @param context file path of package
-     * @param packageName package name of app
-     * @param isKeepData whether keep the data and cache directories around after package removal
-     * @return <ul>
-     *         <li>{@link #DELETE_SUCCEEDED} means uninstall success</li>
-     *         <li>{@link #DELETE_FAILED_INTERNAL_ERROR} means internal error</li>
-     *         <li>{@link #DELETE_FAILED_INVALID_PACKAGE} means package name error</li>
-     *         <li>{@link #DELETE_FAILED_PERMISSION_DENIED} means permission denied</li>
+     * 通过root卸载
+     * @param context
+     * @param packageName
+     * @param isKeepData
+     * @return
      */
     public static int uninstallSilent(Context context, String packageName, boolean isKeepData) {
         if (packageName == null || packageName.length() == 0) {
@@ -428,8 +388,7 @@ public class PackageUtil {
     /**
      * whether the app whost package's name is packageName is on the top of the stack
      * <ul>
-     * <strong>Attentions:</strong>
-     * <li>You should add <strong>android.permission.GET_TASKS</strong> in manifest</li>
+     * <li>You should add android.permission.GET_TASKS in manifest</li>
      * </ul>
      * 
      * @param context
@@ -484,7 +443,6 @@ public class PackageUtil {
      * can be set by System Menu Setting->Storage->Prefered install location
      * 
      * @return
-     * @see {@link IPackageManager#getInstallLocation()}
      */
     public static int getInstallLocation() {
         CommandResult commandResult = ShellUtil.execCommand(
@@ -640,7 +598,7 @@ public class PackageUtil {
     /**
      * Installation return code<br/>
      * the new package failed because it has specified that it is a test-only package and the caller has not supplied
-     * the {@link #INSTALL_ALLOW_TEST} flag.
+     * the INSTALL_ALLOW_TEST flag.
      */
     public static final int INSTALL_FAILED_TEST_ONLY                       = -15;
 

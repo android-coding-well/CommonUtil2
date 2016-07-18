@@ -26,8 +26,8 @@ public class CommonUtil {
 
 
     /**
-     * 判断某个界面是否在前台
-     *<uses-permission android:name="android.permission.GET_TASKS"/>
+     * 判断某个界面是否在前台</br>
+     * 需要权限：android.permission.GET_TASKS
      * @param context
      * @param className
      *            某个界面名称

@@ -12,20 +12,6 @@ import java.util.regex.Pattern;
 public class StringUtil {
 
 	/**
-	 * 判断字符串是否为null
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static boolean isEmpty(String str) {
-		if (str == null || "".equals(str.trim())) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * 判断字符串是否含有中文
 	 * 
 	 * @param str

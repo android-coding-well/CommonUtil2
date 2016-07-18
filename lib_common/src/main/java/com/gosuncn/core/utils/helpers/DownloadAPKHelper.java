@@ -26,10 +26,6 @@ public class DownloadAPKHelper {
 
     private long myDownloadReference;
 
-    public long getMyDownloadReference() {
-        return myDownloadReference;
-    }
-
     /**
      * @param context
      * @param appName     应用名
@@ -72,7 +68,6 @@ public class DownloadAPKHelper {
         request.setNotificationVisibility(visibility);
     }
 
-
     /**
      * 指定保存路径
      *
@@ -87,14 +82,29 @@ public class DownloadAPKHelper {
     }
 
     /**
-     * 设置标题和描述
+     * 设置标题
      *
      * @param title
+     */
+    public void setTitle(String title) {
+        request.setTitle(title);
+    }
+
+    /**
+     * 设置描述
+     *
      * @param description
      */
-    public void setTitle(String title, String description) {
-        request.setTitle(title);
+    public void setDescription(String description) {
         request.setDescription(description);
+    }
+
+    /**
+     * 获得reference,可用于停止下载
+     * @return
+     */
+    public long getMyDownloadReference() {
+        return myDownloadReference;
     }
 
     /**
@@ -145,7 +155,6 @@ public class DownloadAPKHelper {
                     }
             }
         };
-
         context.registerReceiver(receiver, filter);
     }
 

@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by HWJ on 2015/11/16.
+ * 验证工具类
  */
 public class RegexUtil {
     /**

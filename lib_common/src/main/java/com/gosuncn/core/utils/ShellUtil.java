@@ -7,22 +7,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 /**
- * ShellUtils
- * <ul>
- * <strong>Check root</strong>
- * <li>{@link ShellUtil#checkRootPermission()}</li>
- * </ul>
- * <ul>
- * <strong>Execte command</strong>
- * <li>{@link ShellUtil#execCommand(String, boolean)}</li>
- * <li>{@link ShellUtil#execCommand(String, boolean, boolean)}</li>
- * <li>{@link ShellUtil#execCommand(List, boolean)}</li>
- * <li>{@link ShellUtil#execCommand(List, boolean, boolean)}</li>
- * <li>{@link ShellUtil#execCommand(String[], boolean)}</li>
- * <li>{@link ShellUtil#execCommand(String[], boolean, boolean)}</li>
- * </ul>
- * 
- * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2013-5-16
+ * shell工具
  */
 public class ShellUtil {
 
@@ -36,7 +21,7 @@ public class ShellUtil {
     }
 
     /**
-     * check whether has root permission
+     * 检查是否有root权限
      * 
      * @return
      */
@@ -45,78 +30,64 @@ public class ShellUtil {
     }
 
     /**
-     * execute shell command, default return result msg
-     * 
-     * @param command command
-     * @param isRoot whether need to run with root
+     * 执行shell命令
+     * @param command  单条命令
+     * @param isRoot  是否需要root执行
      * @return
-     * @see ShellUtil#execCommand(String[], boolean, boolean)
      */
     public static CommandResult execCommand(String command, boolean isRoot) {
         return execCommand(new String[] {command}, isRoot, true);
     }
 
     /**
-     * execute shell commands, default return result msg
-     * 
-     * @param commands command list
-     * @param isRoot whether need to run with root
+     * 执行shell命令
+     * @param commands  多条命令
+     * @param isRoot    是否需要root执行
      * @return
-     * @see ShellUtil#execCommand(String[], boolean, boolean)
      */
     public static CommandResult execCommand(List<String> commands, boolean isRoot) {
         return execCommand(commands == null ? null : commands.toArray(new String[] {}), isRoot, true);
     }
 
     /**
-     * execute shell commands, default return result msg
-     * 
-     * @param commands command array
-     * @param isRoot whether need to run with root
+     * 执行shell命令
+     * @param commands  多条命令
+     * @param isRoot    是否需要root执行
      * @return
-     * @see ShellUtil#execCommand(String[], boolean, boolean)
      */
     public static CommandResult execCommand(String[] commands, boolean isRoot) {
         return execCommand(commands, isRoot, true);
     }
 
     /**
-     * execute shell command
-     * 
-     * @param command command
-     * @param isRoot whether need to run with root
-     * @param isNeedResultMsg whether need result msg
+     * 执行shell命令
+     * @param command           单条命令
+     * @param isRoot            是否需要root执行
+     * @param isNeedResultMsg   是否需要结果信息
      * @return
-     * @see ShellUtil#execCommand(String[], boolean, boolean)
      */
     public static CommandResult execCommand(String command, boolean isRoot, boolean isNeedResultMsg) {
         return execCommand(new String[] {command}, isRoot, isNeedResultMsg);
     }
 
     /**
-     * execute shell commands
-     * 
-     * @param commands command list
-     * @param isRoot whether need to run with root
-     * @param isNeedResultMsg whether need result msg
+     * 执行shell命令
+     * @param commands           命令
+     * @param isRoot            是否需要root执行
+     * @param isNeedResultMsg   是否需要结果信息
      * @return
-     * @see ShellUtil#execCommand(String[], boolean, boolean)
      */
     public static CommandResult execCommand(List<String> commands, boolean isRoot, boolean isNeedResultMsg) {
         return execCommand(commands == null ? null : commands.toArray(new String[] {}), isRoot, isNeedResultMsg);
     }
 
+
     /**
-     * execute shell commands
-     * 
-     * @param commands command array
-     * @param isRoot whether need to run with root
-     * @param isNeedResultMsg whether need result msg
-     * @return <ul>
-     *         <li>if isNeedResultMsg is false, {@link CommandResult#successMsg} is null and
-     *         {@link CommandResult#errorMsg} is null.</li>
-     *         <li>if {@link CommandResult#result} is -1, there maybe some excepiton.</li>
-     *         </ul>
+     * 执行shell命令
+     * @param commands           命令
+     * @param isRoot            是否需要root执行
+     * @param isNeedResultMsg   是否需要结果信息
+     * @return
      */
     public static CommandResult execCommand(String[] commands, boolean isRoot, boolean isNeedResultMsg) {
         int result = -1;
@@ -190,15 +161,7 @@ public class ShellUtil {
     }
 
     /**
-     * result of command
-     * <ul>
-     * <li>{@link CommandResult#result} means result of command, 0 means normal, else means error, same to excute in
-     * linux shell</li>
-     * <li>{@link CommandResult#successMsg} means success message of command result</li>
-     * <li>{@link CommandResult#errorMsg} means error message of command result</li>
-     * </ul>
-     * 
-     * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2013-5-16
+     * 命令执行结果
      */
     public static class CommandResult {
 

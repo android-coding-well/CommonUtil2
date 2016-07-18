@@ -10,10 +10,16 @@ import android.widget.RelativeLayout.LayoutParams;
 
 import java.lang.reflect.Field;
 
+/**
+ * Listview和Gridview高度设置的工具类
+ */
 public class ViewUtil {
-	 /**
-     * get ListView height according to every children
-     * 
+    private static final String CLASS_NAME_GRID_VIEW = "android.widget.GridView";
+    private static final String FIELD_NAME_VERTICAL_SPACING = "mVerticalSpacing";
+
+    /**
+     * 获得listview的高度
+     *
      * @param view
      * @return
      */
@@ -27,12 +33,9 @@ public class ViewUtil {
         return height;
     }
 
-    private static final String CLASS_NAME_GRID_VIEW        = "android.widget.GridView";
-    private static final String FIELD_NAME_VERTICAL_SPACING = "mVerticalSpacing";
 
     /**
-     * get GridView vertical spacing
-     * 
+     * 获得gridview的高度
      * @param view
      * @return
      */
@@ -44,7 +47,7 @@ public class ViewUtil {
             demo = Class.forName(CLASS_NAME_GRID_VIEW);
             Field field = demo.getDeclaredField(FIELD_NAME_VERTICAL_SPACING);
             field.setAccessible(true);
-            verticalSpacing = (Integer)field.get(view);
+            verticalSpacing = (Integer) field.get(view);
             return verticalSpacing;
         } catch (Exception e) {
             /**
@@ -58,16 +61,15 @@ public class ViewUtil {
 
     /**
      * get AbsListView height according to every children
-     * 
+     *
      * @param view
      * @return
      */
-    public static int getAbsListViewHeightBasedOnChildren(AbsListView view) {
+    private static int getAbsListViewHeightBasedOnChildren(AbsListView view) {
         ListAdapter adapter;
         if (view == null || (adapter = view.getAdapter()) == null) {
             return 0;
         }
-
         int height = 0;
         for (int i = 0; i < adapter.getCount(); i++) {
             View item = adapter.getView(i, null, view);
@@ -83,37 +85,28 @@ public class ViewUtil {
 
     /**
      * set view height
-     * 
+     *
      * @param view
      * @param height
      */
-    public static void setViewHeight(View view, int height) {
+    private static void setViewHeight(View view, int height) {
         if (view == null) {
             return;
         }
-
         ViewGroup.LayoutParams params = view.getLayoutParams();
         params.height = height;
     }
 
 
     /**
-     * set ListView height which is calculated by {@link # getListViewHeightBasedOnChildren(ListView)}
-     * 
+     * 设置listview的高度
      * @param view
-     * @return
      */
     public static void setListViewHeightBasedOnChildren(ListView view) {
         setViewHeight(view, getListViewHeightBasedOnChildren(view));
     }
 
-    /**
-     * set AbsListView height which is calculated by {@link # getAbsListViewHeightBasedOnChildren(AbsListView)}
-     * 
-     * @param view
-     * @return
-     */
-    public static void setAbsListViewHeightBasedOnChildren(AbsListView view) {
+    private static void setAbsListViewHeightBasedOnChildren(AbsListView view) {
         setViewHeight(view, getAbsListViewHeightBasedOnChildren(view));
     }
 

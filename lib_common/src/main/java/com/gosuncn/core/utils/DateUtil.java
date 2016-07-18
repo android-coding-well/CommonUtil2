@@ -1,6 +1,5 @@
 package com.gosuncn.core.utils;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -67,8 +66,8 @@ public class DateUtil {
      */
     public static String getDescriptionTimeFromTimestamp2(long timestamp) {
 
-        Date date = longToDate(timestamp, FORMAT_DATE_TIME);
-        int ret = judgeCurrentDateIsYesterday(date);
+        Date date = timestampToDate(timestamp, FORMAT_DATE_TIME);
+        int ret = judgeCurrentDate(date);
         if (ret == 2) {
             return "昨天";
         }
@@ -78,16 +77,16 @@ public class DateUtil {
         String timeStr = null;
         if (timeGap > YEAR) {
             //timeStr = timeGap / YEAR + "年前";
-            timeStr = longToString(timestamp, "MM-dd-yyyy");
+            timeStr = timestampToDateStr(timestamp, "MM-dd-yyyy");
         } else if (timeGap > MONTH) {
             //timeStr = timeGap / MONTH + "个月前";
-            timeStr = longToString(timestamp, "MM-dd");
+            timeStr = timestampToDateStr(timestamp, "MM-dd");
         } else if (timeGap > DAY) {// 1天以上,显示日期
             //timeStr = timeGap / DAY + "天前";
-            timeStr = longToString(timestamp, "MM-dd");
+            timeStr = timestampToDateStr(timestamp, "MM-dd");
         } else if (timeGap > HOUR) {// 1小时-24小时,显示格式为HH:mm
             //timeStr = timeGap / HOUR + "小时前";
-            timeStr = longToString(timestamp, FORMAT_TIME);
+            timeStr = timestampToDateStr(timestamp, FORMAT_TIME);
         } else if (timeGap > MINUTE) {// 1分钟-59分钟
             timeStr = timeGap / MINUTE + "分钟前";
         } else {// 1秒钟-59秒钟
@@ -110,7 +109,7 @@ public class DateUtil {
     /**
      * 根据时间戳获取描述性时间，如刚刚，x分钟前，昨天，月-日，月-日-年
      *
-     * @param dateStr ""
+     * @param dateStr yyyy-MM-dd HH:mm:ss
      * @return
      */
     public static String getDescriptionTimeFromTimestamp2(String dateStr) {
@@ -124,10 +123,10 @@ public class DateUtil {
     }
 
     /**
-     * 时间戳转换为date(yyyy-MM-dd HH:mm:ss)
+     * 时间戳转换为字符串(yyyy-MM-dd HH:mm:ss)
      *
      * @param timestamp
-     * @return
+     * @return yyyy-MM-dd HH:mm:ss
      */
     public static String timestampToDate(long timestamp) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -135,57 +134,38 @@ public class DateUtil {
         return sd;
     }
 
+   /* public static String timestampToDateStr(long timestamp,String pattern) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sd = sdf.format(new Date(timestamp));
+        return sd;
+    }*/
+
     /**
-     * 自定义格式时间戳转换
+     * 时间戳转换自定义格式日期
      *
      * @param timestamp
+     * @param pattern
      * @return
      */
-    public static String timestampToDate(long timestamp, String format) {
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
+    public static String timestampToDateStr(long timestamp, String pattern) {
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         String sd = sdf.format(new Date(timestamp));
         return sd;
     }
 
     /**
-     * 自定义格式时间戳转换
+     * 时间戳转换自定义格式日期
      *
-     * @param beginDate
+     * @param timestamp 时间戳
+     * @param pattern
      * @return
      */
-    public static String timestampToDate(String beginDate, String format) {
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        String sd = sdf.format(new Date(Long.parseLong(beginDate)));
-        return sd;
+    public static Date timestampToDate(long timestamp, String pattern) {
+        Date dateOld = new Date(timestamp); // 根据long类型的毫秒数生命一个date类型的时间
+        String sDateTime = dateToString(dateOld, pattern); // 把date类型的时间转换为string
+        Date date = stringToDate(sDateTime, pattern); // 把String类型转换为Date类型
+        return date;
     }
-
-    /**
-     * 把日期转为字符串
-     *
-     * @param date
-     * @param format "yyyy-MM-dd HH:mm:ss"
-     * @return
-     */
-    @Deprecated
-    public static String ConverToString(Date date, String format) {
-        DateFormat df = new SimpleDateFormat(format);
-        return df.format(date);
-    }
-
-
-    /**
-     * 把字符串转为日期
-     *
-     * @param strDate
-     * @return
-     * @throws Exception
-     */
-    @Deprecated
-    public static Date ConverToDate(String strDate) throws Exception {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return df.parse(strDate);
-    }
-
 
     /**
      * 将字符串转为时间戳
@@ -193,7 +173,7 @@ public class DateUtil {
      * @param date "yyyy-MM-dd HH:mm:ss"
      * @return
      */
-    public static long dateToTimestamp(String date) {
+    public static long dateStrToTimestamp(String date) {
         long re_time = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date d;
@@ -206,41 +186,37 @@ public class DateUtil {
         return re_time;
     }
 
-
     /**
-     * date类型转换为String类型
+     * 将字符串转为时间戳
      *
-     * @param data
-     * @param formatType
+     * @param date "yyyy-MM-dd HH:mm:ss"
      * @return
      */
-    public static String dateToString(Date data, String formatType) {
-        return new SimpleDateFormat(formatType).format(data);
+    public static long dateToTimestamp(Date date) {
+        return date.getTime();
     }
 
+
     /**
-     * long类型转换为String类型
+     * date类型转换为定义格式日期
      *
-     * @param currentTime 要转换的long类型的时间
-     * @param formatType
+     * @param data
+     * @param pattern
      * @return
      */
-    public static String longToString(long currentTime, String formatType) {
-        String strTime = "";
-        Date date = longToDate(currentTime, formatType);// long类型转成Date类型
-        strTime = dateToString(date, formatType); // date类型转成String
-        return strTime;
+    public static String dateToString(Date data, String pattern) {
+        return new SimpleDateFormat(pattern).format(data);
     }
 
     /**
      * string类型转换为date类型
      *
-     * @param strTime    strTime的时间格式必须要与formatType的时间格式相同
-     * @param formatType
+     * @param strTime strTime的时间格式必须要与formatType的时间格式相同
+     * @param pattern
      * @return
      */
-    public static Date stringToDate(String strTime, String formatType) {
-        SimpleDateFormat formatter = new SimpleDateFormat(formatType);
+    public static Date stringToDate(String strTime, String pattern) {
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
         Date date = null;
         try {
             date = formatter.parse(strTime);
@@ -251,91 +227,39 @@ public class DateUtil {
         return date;
     }
 
-    /**
-     * long转换为Date类型
-     *
-     * @param currentTime 要转换的long类型的时间
-     * @param formatType
-     * @return
-     */
-    public static Date longToDate(long currentTime, String formatType) {
-        Date dateOld = new Date(currentTime); // 根据long类型的毫秒数生命一个date类型的时间
-        String sDateTime = dateToString(dateOld, formatType); // 把date类型的时间转换为string
-        Date date = stringToDate(sDateTime, formatType); // 把String类型转换为Date类型
-        return date;
-    }
 
     /**
-     * string类型转换为long类型
+     * string类型转换为时间戳
      *
-     * @param strTime    strTime的时间格式和formatType的时间格式必须相同
-     * @param formatType
+     * @param strTime strTime的时间格式和formatType的时间格式必须相同
+     * @param pattern
      * @return
      */
-    public static long stringToLong(String strTime, String formatType) {
-        Date date = stringToDate(strTime, formatType); // String类型转成date类型
+    public static long stringToTimestamp(String strTime, String pattern) {
+        Date date = stringToDate(strTime, pattern); // String类型转成date类型
         if (date == null) {
             return 0;
         } else {
-            long currentTime = dateToLong(date); // date类型转成long类型
+            long currentTime = dateToTimestamp(date); // date类型转成long类型
             return currentTime;
         }
     }
 
     /**
-     * date类型转换为long类型
-     *
-     * @param date
-     * @return
-     */
-    public static long dateToLong(Date date) {
-        return date.getTime();
-    }
-
-
-    /**
      * 获取当前日期的指定格式的字符串
      *
-     * @param format 指定的日期时间格式，若为null或""则使用指定的格式"yyyy-MM-dd HH:MM:ss"
+     * @param pattern 指定的日期时间格式，若为null或""则使用指定的格式"yyyy-MM-dd HH:MM:ss"
      * @return
      */
-    public static String getCurrentTime(String format) {
-        if (format == null || format.trim().equals("")) {
+    public static String getCurrentTime(String pattern) {
+        if (pattern == null || pattern.trim().equals("")) {
             sdf.applyPattern(FORMAT_DATE_TIME);
         } else {
-            sdf.applyPattern(format);
+            sdf.applyPattern(pattern);
         }
         return sdf.format(new Date());
     }
 
-    /**
-     * 获得指定日期与当前日期相差的天数
-     *
-     * @param day1
-     * @param isOld 指定日期是否早于当前日期
-     * @return
-     * @throws ParseException
-     */
-    public static int getBetweenDays(Date day1, boolean isOld) throws ParseException {
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-        day1 = sf.parse(sf.format(day1));
-
-        Calendar c = Calendar.getInstance();
-        Date day2 = sf.parse(sf.format(c.getTime()));
-
-        c.setTime(day1);
-        long d1 = c.getTimeInMillis();
-
-        c.setTime(day2);
-        long d2 = c.getTimeInMillis();
-        long between;
-        if (isOld) {
-            between = (d2 - d1) / (1000 * 3600 * 24);
-        } else {
-            between = (d1 - d2) / (1000 * 3600 * 24);
-        }
-        return Integer.parseInt(String.valueOf(between));
-    }
 
     /**
      * 将时间戳转为“yy-MM-dd HH:mm”格式字符串
@@ -399,7 +323,7 @@ public class DateUtil {
      * @param time yyyy-MM-dd HH:mm:ss
      * @return 0-格式错误 1-今天 2-昨天 3-日期
      */
-    public static int judgeCurrentDateIsYesterday(String time) {
+    public static int judgeCurrentDate(String time) {
         SimpleDateFormat format = new SimpleDateFormat(
                 "yyyy-MM-dd HH:mm:ss");
         if (time == null || "".equals(time)) {
@@ -453,7 +377,7 @@ public class DateUtil {
      * @param date
      * @return 0-格式错误 1-今天 2-昨天 3-日期
      */
-    public static int judgeCurrentDateIsYesterday(Date date) {
+    public static int judgeCurrentDate(Date date) {
         if (date == null) {
             return 0;
         }
@@ -493,51 +417,26 @@ public class DateUtil {
     /**
      * 获得日期的下一天
      *
-     * @param inputDate
+     * @param date
      * @return
      */
-    public static String getNextDayStr(Date inputDate) {// 接收输入的日期inputDate
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    public static Date getNextDay(Date date) {// 接收输入的日期inputDate
         Calendar nextDate = Calendar.getInstance();
-        nextDate.setTime(inputDate);
-        nextDate.add(Calendar.DAY_OF_MONTH, 1);
-
-        String dateStr = sdf.format(nextDate.getTime()); // 把日期格式化
-        return dateStr;
-    }
-
-    public static Date getNextDay(Date inputDate) {// 接收输入的日期inputDate
-        Calendar nextDate = Calendar.getInstance();
-        nextDate.setTime(inputDate);
+        nextDate.setTime(date);
         nextDate.add(Calendar.DAY_OF_MONTH, 1);
         return nextDate.getTime();
     }
 
-    /**
-     * 获得日期的前一天
-     *
-     * @param inputDate
-     * @return
-     */
-    public static String getForeDayStr(Date inputDate) {// 接收输入的日期inputDate
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        Calendar nextDate = Calendar.getInstance();
-        nextDate.setTime(inputDate);
-        nextDate.add(Calendar.DAY_OF_MONTH, -1);
-
-        String dateStr = sdf.format(nextDate.getTime()); // 把日期格式化
-        return dateStr;
-    }
 
     /**
      * 获得日期的前一天
      *
-     * @param inputDate
+     * @param date
      * @return
      */
-    public static Date getForeDay(Date inputDate) {// 接收输入的日期inputDate
+    public static Date getForeDay(Date date) {// 接收输入的日期inputDate
         Calendar nextDate = Calendar.getInstance();
-        nextDate.setTime(inputDate);
+        nextDate.setTime(date);
         nextDate.add(Calendar.DAY_OF_MONTH, -1);
         return nextDate.getTime();
     }
@@ -557,7 +456,6 @@ public class DateUtil {
             index = 0;
         }
         return weeks[index];
-
     }
 
     /**
@@ -623,10 +521,10 @@ public class DateUtil {
     }
 
     /**
-     * 获得日期所在的月份
+     * 判断是否在当月
      *
      * @param date
-     * @return 月份
+     * @return
      */
     public static boolean isCurrentMonth(Date date) {
         Calendar c1 = Calendar.getInstance();
@@ -642,7 +540,7 @@ public class DateUtil {
     }
 
     /**
-     * 获得日期所在的月份
+     * 判断是否在当月
      *
      * @param dateStr
      * @return 月份

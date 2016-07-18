@@ -17,7 +17,7 @@ public class MD5Util {
     private static final char hexDigits[] =
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
-    public static String toHexString(byte[] bytes) {
+    private static String toHexString(byte[] bytes) {
         if (bytes == null) return "";
         StringBuilder hex = new StringBuilder(bytes.length * 2);
         for (byte b : bytes) {
@@ -27,6 +27,12 @@ public class MD5Util {
         return hex.toString();
     }
 
+    /**
+     * MD5编码
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public static String md5(File file) throws IOException {
         MessageDigest messagedigest = null;
         FileInputStream in = null;
@@ -53,6 +59,11 @@ public class MD5Util {
         return toHexString(encodeBytes);
     }
 
+    /**
+     * MD5编码
+     * @param string
+     * @return
+     */
     public static String md5(String string) {
         byte[] encodeBytes = null;
         try {

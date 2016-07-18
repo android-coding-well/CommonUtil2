@@ -1,19 +1,20 @@
 package com.gosuncn.core.utils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.webkit.CookieManager;
@@ -82,7 +83,7 @@ public class NetUtil {
     public static boolean hasInternetPermission(Context context) {
         if (context != null) {
             return context
-                    .checkCallingOrSelfPermission("android.permission.INTERNET") == 0;
+                    .checkCallingOrSelfPermission("android.permission.INTERNET") == PackageManager. PERMISSION_GRANTED;
         }
         return true;
     }
@@ -326,8 +327,8 @@ public class NetUtil {
 
     /**
      * 设置手机的移动数据的开关
-     * 需要权限<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-     * <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+     * 需要权限android.permission.ACCESS_NETWORK_STATE<br/>
+     * android.permission.CHANGE_NETWORK_STATE
      *
      * @param pContext
      * @param pBoolean

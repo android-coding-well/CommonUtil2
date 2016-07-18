@@ -1,14 +1,14 @@
 package com.gosuncn.core.utils.helpers;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.TrafficStats;
 
 import com.gosuncn.core.utils.DateUtil;
 import com.gosuncn.core.utils.NetUtil;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.TrafficStats;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 流量助手
@@ -68,7 +68,7 @@ public class TrafficHelper {
 	/**
 	 * 单例模式，获取instance实例
 	 * 
-	 * @param cxt
+	 * @param context
 	 * @return
 	 */
 	public static TrafficHelper getInstance(Context context) {

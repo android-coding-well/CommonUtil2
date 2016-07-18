@@ -1,6 +1,7 @@
 package com.gosuncn.core.utils;
 
 import android.content.Context;
+import android.support.annotation.AnimRes;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -73,8 +74,15 @@ public class AnimationUtil {
         return rorateAnimation;
     }
 
-
-    public static Animation getAnimation(Context context, int animId, int counts, int duration) {
+    /**
+     * 根据动画资源获得动画对象
+     * @param context
+     * @param animId        动画资源
+     * @param counts        循环次数
+     * @param duration      动画时间
+     * @return
+     */
+    public static Animation getAnimation(Context context, @AnimRes int animId, int counts, int duration) {
         Animation animation = AnimationUtils.loadAnimation(context, animId);
         animation.setInterpolator(new CycleInterpolator(counts));
         animation.setDuration(duration);

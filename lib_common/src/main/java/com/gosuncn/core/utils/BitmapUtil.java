@@ -1,15 +1,8 @@
 package com.gosuncn.core.utils;
 
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.PorterDuff.Mode;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.media.ExifInterface;
 import android.media.ThumbnailUtils;
 
@@ -23,12 +16,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * @author lwh
- * @date 2015-4-24 下午1:50:41
+ * 位图处理工具
  */
 public class BitmapUtil {
-
-
     /**
      * 回收垃圾 recycle
      *
@@ -45,7 +35,7 @@ public class BitmapUtil {
     }
 
     /**
-     * 此函数用于提取缩略图，以节省内存。
+     * 提取缩略图
      *
      * @param isFromAssets
      * @param path
@@ -140,7 +130,6 @@ public class BitmapUtil {
     }
 
 
-
     /**
      * 获取视频的缩略图
      * 先通过ThumbnailUtils来创建一个视频的缩略图，然后再利用ThumbnailUtils来生成指定大小的缩略图。
@@ -172,194 +161,6 @@ public class BitmapUtil {
                 }
             }
         }
-    }
-
-    /**
-     * 合并两种Bitmap
-     *
-     * @param background
-     * @param foreground
-     * @return
-     */
-    @Deprecated
-    public static Bitmap toConformBitmap(Bitmap background, Bitmap foreground) {
-        if (background == null) {
-            return null;
-        }
-
-        int bgWidth = foreground.getWidth();
-        int bgHeight = foreground.getHeight();
-        background = ThumbnailUtils.extractThumbnail(background, bgWidth, bgHeight);
-        //int fgWidth = foreground.getWidth();
-        //int fgHeight = foreground.getHeight();
-        //create the new blank bitmap 创建一个新的和SRC长度宽度一样的位图
-        Bitmap newbmp = Bitmap.createBitmap(bgWidth, bgHeight, Config.ARGB_8888);
-        Canvas cv = new Canvas(newbmp);
-        //draw bg into
-        cv.drawBitmap(background, 0, 0, null);//在 0，0坐标开始画入bg
-        //draw fg into
-        cv.drawBitmap(foreground, 0, 0, null);//在 0，0坐标开始画入fg ，可以从任意位置画入
-        //save all clip
-        cv.save(Canvas.ALL_SAVE_FLAG);//保存
-        //store
-        cv.restore();//存储
-        return newbmp;
-    }
-
-
-    /**
-     * 按比例压缩图片并保存（此方法还未测试过）
-     *
-     * @param fromFile 源文件
-     * @param toFile   存地址
-     * @param scale    压缩比例
-     * @param quality  质量 （0-100 100--最高质量）
-     */
-    @Deprecated
-    public static void transImage(String fromFile, String toFile, float scale, int quality) {
-        try {
-            Bitmap bitmap = BitmapFactory.decodeFile(fromFile);
-            int bitmapWidth = bitmap.getWidth();
-            int bitmapHeight = bitmap.getHeight();
-            // 缩放图片的尺寸比列
-            Matrix matrix = new Matrix();
-            matrix.postScale(scale, scale);
-            // 产生缩放后的Bitmap对象
-            Bitmap resizeBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmapWidth, bitmapHeight, matrix, false);
-            // save file
-            File myCaptureFile = new File(toFile);
-            FileOutputStream out = new FileOutputStream(myCaptureFile);
-            if (resizeBitmap.compress(Bitmap.CompressFormat.JPEG, quality, out)) {
-                out.flush();
-                out.close();
-            }
-            /*if (!bitmap.isRecycled()) {
-                bitmap.recycle();//记得释放资源，否则会内存溢出
-            }
-            if (!resizeBitmap.isRecycled()) {
-                resizeBitmap.recycle();
-            }*/
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-
-    /**
-     * 按比例压缩图片并保存
-     *
-     * @param fromFile 源文件
-     * @param toFile   存地址
-     * @param scale    压缩比例
-     * @param quality  质量 （0-100 100--最高质量）
-     * @return 压缩后的Bitmap
-     */
-    @Deprecated
-    public static Bitmap resizeImage(String fromFile, String toFile, float scale, int quality) {
-        FileOutputStream out = null;
-        try {
-            Bitmap bitmap = BitmapFactory.decodeFile(fromFile);
-            int bitmapWidth = bitmap.getWidth();
-            int bitmapHeight = bitmap.getHeight();
-            // 缩放图片的尺寸比列
-            Matrix matrix = new Matrix();
-            matrix.postScale(scale, scale);
-            // 产生缩放后的Bitmap对象
-            Bitmap resizeBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmapWidth, bitmapHeight, matrix, false);
-            // save file
-            File myCaptureFile = new File(toFile);
-            if (!myCaptureFile.exists()) {
-                try {
-                    myCaptureFile.createNewFile();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            out = new FileOutputStream(myCaptureFile);
-            if (resizeBitmap.compress(Bitmap.CompressFormat.JPEG, quality, out)) {
-                out.flush();
-                out.close();
-            }
-            if (!bitmap.isRecycled()) {
-                bitmap.recycle();//记得释放资源，否则会内存溢出
-            }
-            return resizeBitmap;
-
-             /*
-            if (!resizeBitmap.isRecycled()) {
-                resizeBitmap.recycle();
-            }*/
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
-    }
-
-
-    /**
-     * 压缩图片
-     *
-     * @param bitmap
-     * @param toFile  保存地址
-     * @param scale   压缩比例
-     * @param quality 质量 （0-100 100--最高质量）
-     * @return
-     */
-    @Deprecated
-    public static Bitmap transImage(Bitmap bitmap, String toFile, float scale, int quality) {
-        FileOutputStream out = null;
-        try {
-            int bitmapWidth = bitmap.getWidth();
-            int bitmapHeight = bitmap.getHeight();
-            // 缩放图片的尺寸
-            Matrix matrix = new Matrix();
-            matrix.postScale(scale, scale);
-            // 产生缩放后的Bitmap对象
-            Bitmap resizeBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmapWidth, bitmapHeight, matrix, false);
-            // save file
-            File myCaptureFile = new File(toFile);
-            out = new FileOutputStream(myCaptureFile);
-            if (resizeBitmap.compress(Bitmap.CompressFormat.JPEG, quality, out)) {
-                out.flush();
-                out.close();
-            }
-
-            //此处不能将其释放，否则会导致第二次抓拍失败，下面的代码要注释
-            //  if(!bitmap.isRecycled()){
-            //      bitmap.recycle();//记得释放资源，否则会内存溢出
-            //  }
-            return resizeBitmap;
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return null;
     }
 
 
@@ -417,18 +218,19 @@ public class BitmapUtil {
 
     /**
      * 将file转为bitmap
-     * @param dst
-     * @param width 指定宽度
+     *
+     * @param file
+     * @param width  指定宽度
      * @param height 指定高度
      * @return
      */
-    public static Bitmap getBitmapFromFile(File dst, int width, int height) {
-        if (null != dst && dst.exists()) {
+    public static Bitmap getBitmapFromFile(File file, int width, int height) {
+        if (null != file && file.exists()) {
             BitmapFactory.Options opts = null;
             if (width > 0 && height > 0) {
                 opts = new BitmapFactory.Options();
                 opts.inJustDecodeBounds = true;
-                BitmapFactory.decodeFile(dst.getPath(), opts);
+                BitmapFactory.decodeFile(file.getPath(), opts);
                 // 计算图片缩放比例
                 final int minSideLength = Math.min(width, height);
                 opts.inSampleSize = computeSampleSize(opts, minSideLength,
@@ -438,14 +240,13 @@ public class BitmapUtil {
                 opts.inPurgeable = true;
             }
             try {
-                return BitmapFactory.decodeFile(dst.getPath(), opts);
+                return BitmapFactory.decodeFile(file.getPath(), opts);
             } catch (OutOfMemoryError e) {
                 e.printStackTrace();
             }
         }
         return null;
     }
-
 
 
     /**
@@ -473,7 +274,7 @@ public class BitmapUtil {
                     degree = 270;
                     break;
                 default:
-                    degree=0;
+                    degree = 0;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -500,103 +301,6 @@ public class BitmapUtil {
     }
 
     /**
-     * 将图片变为圆角
-     *
-     * @param bitmap 原Bitmap图片
-     * @param pixels 图片圆角的弧度(单位:像素(px))
-     * @return 带有圆角的图片(Bitmap 类型)
-     */
-    @Deprecated
-    public static Bitmap toRoundCorner(Bitmap bitmap, int pixels) {
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
-
-        final int color = 0xff424242;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final RectF rectF = new RectF(rect);
-        final float roundPx = pixels;
-
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-
-        return output;
-    }
-
-    /**
-     * 将图片转化为圆形头像
-     *
-     * @throws
-     * @Title: toRoundBitmap
-     */
-    @Deprecated
-    public static Bitmap toRoundBitmap(Bitmap bitmap) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        float roundPx;
-        float left, top, right, bottom, dst_left, dst_top, dst_right, dst_bottom;
-        if (width <= height) {
-            roundPx = width / 2;
-
-            left = 0;
-            top = 0;
-            right = width;
-            bottom = width;
-
-            height = width;
-
-            dst_left = 0;
-            dst_top = 0;
-            dst_right = width;
-            dst_bottom = width;
-        } else {
-            roundPx = height / 2;
-
-            float clip = (width - height) / 2;
-
-            left = clip;
-            right = width - clip;
-            top = 0;
-            bottom = height;
-            width = height;
-
-            dst_left = 0;
-            dst_top = 0;
-            dst_right = height;
-            dst_bottom = height;
-        }
-
-        Bitmap output = Bitmap.createBitmap(width, height, Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
-
-        final Paint paint = new Paint();
-        final Rect src = new Rect((int) left, (int) top, (int) right,
-                (int) bottom);
-        final Rect dst = new Rect((int) dst_left, (int) dst_top,
-                (int) dst_right, (int) dst_bottom);
-        final RectF rectF = new RectF(dst);
-
-        paint.setAntiAlias(true);// 设置画笔无锯齿
-
-        canvas.drawARGB(0, 0, 0, 0); // 填充整个Canvas
-
-        // 以下有两种方法画圆,drawRounRect和drawCircle
-        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);// 画圆角矩形，第一个参数为图形显示区域，第二个参数和第三个参数分别是水平圆角半径和垂直圆角半径。
-        // canvas.drawCircle(roundPx, roundPx, roundPx, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));// 设置两张图片相交时的模式,参考http://trylovecatch.iteye.com/blog/1189452
-        canvas.drawBitmap(bitmap, src, dst, paint); // 以Mode.SRC_IN模式合并bitmap和已经draw了的Circle
-
-        return output;
-    }
-
-    /**
      * 将bitmap转为file
      *
      * @param bitmap
@@ -618,6 +322,7 @@ public class BitmapUtil {
 
     /**
      * 计算压缩比
+     *
      * @param options
      * @param minSideLength
      * @param maxNumOfPixels
