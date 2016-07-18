@@ -26,7 +26,7 @@ import java.io.FileNotFoundException;
  */
 public class HeadPortraitHelper {
 
-    interface HeadPortraitCropResultListener {
+    public interface HeadPortraitCropResultListener {
         /**
          * 头像裁剪结果
          *
