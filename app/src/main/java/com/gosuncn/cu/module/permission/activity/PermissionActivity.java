@@ -23,7 +23,7 @@ public class PermissionActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     void showCamera() {

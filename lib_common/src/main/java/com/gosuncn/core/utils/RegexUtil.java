@@ -119,7 +119,6 @@ public class RegexUtil {
     /**
      * <pre>
      * 获取网址 URL 的一级域名
-     * http://www.zuidaima.com/share/1550463379442688.htm ->> zuidaima.com
      * </pre>
      *
      * @param url

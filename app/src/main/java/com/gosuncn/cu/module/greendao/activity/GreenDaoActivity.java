@@ -11,21 +11,21 @@ import com.gosuncn.cu.app.MyApplication;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * 简单演示了greenDAO的增删查改
  * 更多猛戳：http://greenrobot.org/greendao/documentation/how-to-get-started/
  */
 public class GreenDaoActivity extends BaseActivity implements GreenDaoContract.View {
-    @InjectView(R.id.et_id)
+    @BindView(R.id.et_id)
     EditText etId;
-    @InjectView(R.id.et_name)
+    @BindView(R.id.et_name)
     EditText etName;
-    @InjectView(R.id.et_age)
+    @BindView(R.id.et_age)
     EditText etAge;
-    @InjectView(R.id.tv_record)
+    @BindView(R.id.tv_record)
     TextView tvRecord;
     @Inject
     GreenDaoPresenter greenDaoPresenter;
@@ -34,7 +34,7 @@ public class GreenDaoActivity extends BaseActivity implements GreenDaoContract.V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_green_dao);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         //MyApplication.getInstance().getActivityComponent(this).inject(this);
         DaggerGreenDaoComponent.builder().appComponent(MyApplication.getInstance().getAppComponent()).greenDaoModule(new GreenDaoModule(this)).build().inject(this);
         //greenDaoPresenter.attachView(this);

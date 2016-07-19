@@ -15,8 +15,8 @@ import org.json.JSONObject;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,19 +26,19 @@ import retrofit2.Response;
  * http://blog.csdn.net/hsk256/article/details/51530667
  */
 public class Dagger2Activity extends BaseActivity {
-
-    @InjectView(R.id.fl_content)
+    @BindView(R.id.fl_content)
     FrameLayout flContent;
     @Inject
     TestService testService;
     @Inject
     TestService2 testService2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dagger2);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         DaggerDagger2Component.builder().appComponent(MyApplication.getInstance().getAppComponent()).build().inject(this);
         test();
         getSupportFragmentManager().beginTransaction()
