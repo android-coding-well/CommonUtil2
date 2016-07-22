@@ -16,6 +16,7 @@ allprojects {
 * and then,add the dependecy:
 ```
 dependencies {
-	        compile 'com.github.huweijian5:CommonUtil2:2.0.2'
+	        compile 'com.github.huweijian5:CommonUtil2:latest_version'
 }
 ```
+* 其中latest_version请到releases中查看
