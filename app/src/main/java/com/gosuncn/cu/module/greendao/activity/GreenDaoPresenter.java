@@ -89,6 +89,7 @@ public class GreenDaoPresenter implements GreenDaoContract.Presenter {
      */
     @Override
     public void deleteUser() {
+
         if (TextUtils.isEmpty(view.getUserId())) {
             view.showHint("id不能为空");
             return;
@@ -163,6 +164,4 @@ public class GreenDaoPresenter implements GreenDaoContract.Presenter {
     public void showRecordCount() {
         view.setRecordCount(userDao.count());
     }
-
-
 }

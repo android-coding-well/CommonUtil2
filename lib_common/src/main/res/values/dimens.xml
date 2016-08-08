@@ -5,13 +5,26 @@
 
 
     <!--以下命名和取值仅供参考，请不要修改此处-->
-    <dimen name="app_top_title">20sp</dimen>
-    <dimen name="app_title">18sp</dimen>
-    <dimen name="app_subtitle">16sp</dimen>
-    <dimen name="app_content">15sp</dimen>
-    <dimen name="app_content_min">12sp</dimen>
+    <!--顶部标题栏文字大小-->
+    <dimen name="app_top_title_size">20sp</dimen>
+    <!--顶部标题栏高度-->
+    <dimen name="app_top_title_height">50dp</dimen>
+
+    <!--普通一级标题文字大小-->
+    <dimen name="app_title_size">18sp</dimen>
+    <!--普通二级标题文字大小-->
+    <dimen name="app_subtitle_size">16sp</dimen>
+
+    <!--普通文本文字大小-->
+    <dimen name="app_content_size">15sp</dimen>
+    <!--普通文本文字最小尺寸-->
+    <dimen name="app_content_min_size">12sp</dimen>
+
+    <!--分割线高度-->
     <dimen name="app_divide_line">0.5dp</dimen>
 
-
+    <!--ListView item内边距-->
+    <dimen name="listview_item_padding_left_right">10dp</dimen>
+    <dimen name="listview_item_padding_top_bottom">8dp</dimen>
 
 </resources>

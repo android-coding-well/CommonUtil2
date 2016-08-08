@@ -12,4 +12,10 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
    <!-- </style>-->
 
+    <declare-styleable name="FlowLayout">
+        <attr name="horizontal_spacing" format="dimension" />
+        <attr name="vertical_spacing" format="dimension" />
+    </declare-styleable>
+
+
 </resources>

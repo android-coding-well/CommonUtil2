@@ -68,6 +68,29 @@
             android:onClick="onImageClick"
             android:text="image"
             android:textAllCaps="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="onTestClick"
+            android:text="flowLayout and Button..."
+            android:textAllCaps="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="onAnimViewClick"
+            android:text="AnimView"
+            android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="onOtherClick"
+            android:text="other"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </ScrollView>

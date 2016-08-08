@@ -13,15 +13,6 @@ public class AppConfig {
      */
     public static final String SDCARD_ROOT_PATH = Environment
             .getExternalStorageDirectory().toString();
-    /**
-     * APP根目录
-     */
-    public static final String APP_ROOT_PATH = Environment
-            .getDataDirectory().toString();
-    /**
-     * APP下载缓存根目录
-     */
-    public static final String APP_CACHE_ROOT_PATH = Environment.getDownloadCacheDirectory().toString();
 
     public static final String NET_SERVER_IP="http://ip.gosunyun.com:8000/syservice3/";
 }

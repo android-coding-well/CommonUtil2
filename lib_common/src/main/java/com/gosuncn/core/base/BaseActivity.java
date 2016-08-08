@@ -4,10 +4,14 @@ package com.gosuncn.core.base;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.gosuncn.core.utils.ActivityManagerUtil;
@@ -30,7 +34,6 @@ public  class BaseActivity extends AppCompatActivity {
         initLoadingDialog();
         processExtraData();
     }
-
 
     @Override
     public void recreate() {
@@ -99,6 +102,35 @@ public  class BaseActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage("请稍候...");
     }
+
+    /**
+     * 设置全屏，需在setContentView之前调用
+     */
+    public void setFullScreen(){
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    /**
+     * 获得屏幕宽度
+     * @return
+     */
+    public int getScreenWidth(){
+        Resources resources = this.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        return  dm.widthPixels;
+    }
+
+    /**
+     * 获得屏幕高度
+     * @return
+     */
+    public int getScreenHeight(){
+        Resources resources = this.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        return  dm.heightPixels;
+    }
+
 
     /**
      * 显示加载对话框

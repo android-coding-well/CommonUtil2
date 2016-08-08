@@ -50,7 +50,6 @@ public class WifiHelper {
         if (mWifiManager.isWifiEnabled()) {
             return mWifiManager.setWifiEnabled(false);
         }
-
         return true;
     }
 

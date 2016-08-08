@@ -3,10 +3,12 @@ package com.gosuncn.core.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +116,26 @@ public abstract class BaseFragment extends Fragment {
                 }
             });
         }
+    }
+
+    /**
+     * 获得屏幕宽度
+     * @return
+     */
+    public int getScreenWidth(){
+        Resources resources = this.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        return  dm.widthPixels;
+    }
+
+    /**
+     * 获得屏幕高度
+     * @return
+     */
+    public int getScreenHeight(){
+        Resources resources = this.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        return  dm.heightPixels;
     }
 
     @Override

@@ -2,6 +2,10 @@ package com.gosuncn.cu.db;
 
 import android.content.Context;
 
+import com.gosuncn.cu.db.dao.DaoMaster;
+import com.gosuncn.cu.db.dao.DaoSession;
+
+
 /**
  * Created by hwj on 2016/7/12.
  */

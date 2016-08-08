@@ -5,11 +5,14 @@ import android.view.View;
 
 import com.gosuncn.core.base.BaseActivity;
 import com.gosuncn.cu.R;
+import com.gosuncn.cu.module.animview.AnimViewActivity;
 import com.gosuncn.cu.module.annotation.AnnotationActivity;
 import com.gosuncn.cu.module.dagger2.Dagger2Activity;
 import com.gosuncn.cu.module.databinding.DataBindingActivity;
 import com.gosuncn.cu.module.greendao.activity.GreenDaoActivity;
 import com.gosuncn.cu.module.image.ImageActivity;
+import com.gosuncn.cu.module.other.OtherActivity;
+import com.gosuncn.cu.module.other.TestActivity;
 import com.gosuncn.cu.module.permission.activity.PermissionActivity;
 import com.gosuncn.cu.module.retrofit.RetrofitActivity;
 import com.gosuncn.cu.module.rxjava.RxjavaActivity;
@@ -84,5 +87,17 @@ public class MainActivity extends BaseActivity {
 
     public void onImageClick(View view) {
         gotoActivity(ImageActivity.class);
+    }
+
+    public void onTestClick(View view) {
+        gotoActivity(TestActivity.class);
+    }
+
+    public void onAnimViewClick(View view) {
+        gotoActivity(AnimViewActivity.class);
+    }
+
+    public void onOtherClick(View view) {
+        gotoActivity(OtherActivity.class);
     }
 }

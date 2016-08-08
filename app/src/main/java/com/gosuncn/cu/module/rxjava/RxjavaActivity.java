@@ -10,15 +10,19 @@ import com.gosuncn.cu.bean.common.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Single;
+import rx.SingleSubscriber;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import rx.subjects.PublishSubject;
 
 /**
  * http://blog.chinaunix.net/uid-20771867-id-5187376.html
@@ -28,6 +32,7 @@ public class RxjavaActivity extends BaseActivity {
     private static final String TAG = "RxjavaActivity";
 
     private Subscriber threadSubscriber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,14 +216,13 @@ public class RxjavaActivity extends BaseActivity {
 
     private void test7() {
         //当做线程使用
-
         Observable.create(subscriber -> {
             needWorkInThread();
             subscriber.onNext("1");
             subscriber.onCompleted();
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(threadSubscriber=new Subscriber<Object>() {
+                .subscribe(threadSubscriber = new Subscriber<Object>() {
                     @Override
                     public void onCompleted() {
                         L.e(TAG, "线程执行完毕");
@@ -230,7 +234,78 @@ public class RxjavaActivity extends BaseActivity {
 
                     @Override
                     public void onNext(Object o) {
-                        L.e(TAG, "线程执行结果："+o.toString());
+                        L.e(TAG, "线程执行结果：" + o.toString());
+                    }
+                });
+    }
+
+
+    public void test8() {
+        //请求网络，第一种请求方式
+        Observable.fromCallable(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                needWorkInThread();
+                return null;
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+
+                    }
+                });
+
+        //第二种请求方式
+        Single.fromCallable(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return null;
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleSubscriber<String>() {
+                    @Override
+                    public void onSuccess(String value) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+
+                    }
+                });
+
+        //PublishSubject相当于一个管道，数据从一边进马上从一边出，debounce则是去抖动，意思是在规定的时间之后订阅者才能收到信息
+        PublishSubject publishSubject = PublishSubject.create();
+        publishSubject.onNext("");//可用于点击事件，防止多次点击
+        publishSubject.debounce(400, TimeUnit.MILLISECONDS)
+                .subscribe(new Subscriber<Object>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+
                     }
                 });
     }
@@ -248,7 +323,7 @@ public class RxjavaActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         //退出时关闭线程
-        if( threadSubscriber!=null){
+        if (threadSubscriber != null) {
             L.e(TAG, "关闭线程");
             threadSubscriber.unsubscribe();
         }

@@ -1,12 +1,33 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
 
     dataBinding {
         enabled = true
+    }
+    //生成指定的so目录，避免出现找不到class的异常
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi'
+            universalApk false
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    //重命名生成的apk
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(output.outputFile.parent, defaultConfig.applicationId + "-" + buildType.name + "-v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk");
+        }
     }
 
     //加入compileOptions,这会让IDE使用用JAVA8语法解析
@@ -45,6 +66,12 @@ android {
     }
 }
 
+greendao {
+    schemaVersion 1//指定数据库schema版本号，迁移等操作会用到
+    daoPackage 'com.gosuncn.cu.db.dao'//通过gradle插件生成的数据库相关文件的包名，默认为你的entity所在的包名
+    targetGenDir 'src/main/java'//自定义生成数据库文件的目录,如果没指定则默认在build文件夹里
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -67,6 +94,9 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 
+    //数据库
+    compile 'org.greenrobot:greendao:3.0.1'
+
     //链式编程
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'io.reactivex:rxandroid:1.2.1'
@@ -83,11 +113,8 @@ dependencies {
     //拍照，图片单选多选裁剪旋转，详情戳这里：https://github.com/pengjianbo/GalleryFinal
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
 
-    //数据库
-    compile 'org.greenrobot:greendao:2.2.1'
-    compile 'org.greenrobot:greendao-generator:2.2.0'
-
     //允许时权限管理https://github.com/tbruyelle/RxPermissions
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
+
 
 }

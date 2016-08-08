@@ -111,4 +111,7 @@ dependencies {
     //允许时权限管理https://github.com/tbruyelle/RxPermissions
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'*/
 
+    //自定义漂亮按钮 按钮内可加图标，可不写xml设置按住背景  具体属性 https://github.com/medyo/fancybuttons
+    compile 'com.github.medyo:fancybuttons:1.8.1'
+
 }
