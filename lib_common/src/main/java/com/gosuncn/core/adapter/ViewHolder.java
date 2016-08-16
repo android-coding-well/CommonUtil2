@@ -219,8 +219,21 @@ public class ViewHolder {
      * @return
      */
     public ViewHolder displayImage(@IdRes  int viewId,Context context,String uri,@DrawableRes  int defResourceId){
-        Glide.with(context).load(uri).error(defResourceId).into((ImageView)getView(viewId));
+        displayImage(viewId,context,uri,defResourceId,defResourceId);
         return this;
     }
 
+    /**
+     * 网络加载图片
+     * @param viewId
+     * @param context
+     * @param uri                   图片的网络地址
+     * @param defResourceId         默认显示的图片
+     * @param placeResourceRes      占位图
+     * @return
+     */
+    public ViewHolder displayImage(@IdRes  int viewId,Context context,String uri,@DrawableRes  int defResourceId,@DrawableRes  int placeResourceRes){
+        Glide.with(context).load(uri).placeholder(defResourceId).error(defResourceId).into((ImageView)getView(viewId));
+        return this;
+    }
 }

@@ -1,0 +1,398 @@
+package com.gosuncn.core.utils.helpers;
+
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Environment;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.widget.Toast;
+
+import com.gosuncn.core.utils.L;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+/**
+ * 版本更新管理器（只支持版本号为x.x.x.xxxxxx的格式，如1.0或1.0.3.21等）
+ * <p>
+ * Created by hwj on 2016/7/21.
+ */
+public class VersionUpdateManager {
+    /**
+     * 需要更新
+     */
+    public static final int CHECKUPDATE_NEED = 1;
+    /**
+     * 已是最新
+     */
+    public static final int CHECKUPDATE_LATEST = 2;
+    /**
+     * VersionUpdateInfo设置错误
+     */
+    public static final int CHECKINFO_ERROR_UPDATEVERSIONINFO = 3;
+    /**
+     * 当前版本号未设置或格式错误
+     */
+    public static final int CHECKINFO_ERROR_LOCAL_VERSION = 4;
+    /**
+     * 正确
+     */
+    public static final int CHECKINFO_CORRECT = 5;
+
+    private static final String TAG = "VersionUpdateManager";
+    private VersionUpdateInfo versionUpdateInfo;
+    private DownloadManager downloadManager;
+    private DownloadManager.Request request;
+    private Context context;
+    private String title = "APP";
+    private String description = "应用升级";
+    private String downloadFinishHint = "下载完成，即将安装";
+    private boolean isOnlyWifi = false;
+    private File downloadFile;
+    private long myDownloadReference;
+    private boolean isShowDialog=true;
+    private static VersionUpdateManager instance;
+
+    private VersionUpdateManager() {
+    }
+
+    private String localVersionCode;
+
+    public static VersionUpdateManager getInstance() {
+        if (instance == null) {
+            instance = new VersionUpdateManager();
+        }
+        return instance;
+    }
+
+    /**
+     * 初始化，建议放置在Appliaction
+     * @param context
+     */
+    public void init(Context context) {
+        this.context = context.getApplicationContext();
+        downloadManager = (DownloadManager) context
+                .getSystemService(Context.DOWNLOAD_SERVICE);
+        PackageManager pm = context.getPackageManager();
+        title = context.getApplicationInfo().loadLabel(pm).toString();//标题默认为应用名称
+        try {
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(),
+                    PackageManager.GET_CONFIGURATIONS);
+            localVersionCode = pi.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            L.e(TAG, "获取当前版本号失败");
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 设置下载路径，包括文件名
+     *
+     * @param path
+     */
+    public void setSavePath(String path) {
+        if (TextUtils.isEmpty(path)) {
+            return;
+        }
+        File file = new File(path);
+        if (file != null && file.exists() && file.isFile()) {
+            file.delete();
+        }
+        this.downloadFile = file;
+    }
+
+    /**
+     * 只在wifi下下载
+     */
+    public void setOnlyWifi() {
+        this.isOnlyWifi = true;
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * 设置描述
+     *
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * 设置下载完成后即将安装的提示语
+     *
+     * @param description
+     */
+    public void setDownloadFinishAndInstallHint(String description) {
+        this.downloadFinishHint = description;
+    }
+
+    /**
+     * 设置当前应用版本号，默认会自动获取，只有在获取失败后才需要在此处手动设置
+     *
+     * @param code
+     */
+    public void setLocalVersionCode(String code) {
+        this.localVersionCode = code;
+    }
+
+    /**
+     * 停止下载
+     */
+    public void cancelDownload() {
+        if (downloadManager != null && myDownloadReference != 0) {
+            downloadManager.remove(myDownloadReference);
+        }
+    }
+
+    /**
+     * 设置服务器上的版本信息
+     *
+     * @param versionUpdateInfo
+     */
+    public void setVersionUpdateInfo(VersionUpdateInfo versionUpdateInfo) {
+        this.versionUpdateInfo = versionUpdateInfo;
+    }
+
+    /**
+     * 检查更新
+     *
+     * @param context
+     * @param dialog  是否带对话框
+     * @return
+     */
+    private int checkUpdate(Context context, boolean dialog) {
+        int code = checkVersionUpdateInfo();
+        if (code == CHECKINFO_CORRECT) {
+            if (isAppNewVersion(localVersionCode,versionUpdateInfo.versionCode)) {//需要更新
+                if (dialog) {
+                    showUpdateDialog(context);
+                }
+                return CHECKUPDATE_NEED;
+            } else {
+                //Toast.makeText(context, "已是最新版", Toast.LENGTH_SHORT).show();
+                return CHECKUPDATE_LATEST;
+            }
+        } else {
+            L.e(TAG, "未设置VersionUpdateInfo或传入的VersionUpdateInfo有误，请仔细检查");
+            return code;
+        }
+    }
+
+    /**
+     * 检查更新，带默认对话框（在选择了不更新之后不会再弹出对话框）
+     *
+     * @param context
+     * @return
+     */
+    public int checkUpdateWithDialog(Context context) {
+        return checkUpdate(context, isShowDialog);
+    }
+
+    /**
+     * 强制检查更新（无论如何都会弹出对话框）
+     * @param context
+     * @return
+     */
+    public int forceUpdateWithDialog(Context context) {
+        return checkUpdate(context, true);
+    }
+
+    /**
+     * 检查更新，需要用户自定义对话框并手动调用下载
+     *
+     * @param context
+     * @return
+     */
+    public int checkUpdateNoDialog(Context context) {
+        return checkUpdate(context, false);
+    }
+
+    /**
+     * 开始下载,下载失败请检查设置的保存路径是否正确
+     */
+    public boolean download() {
+        try {
+            registerDownloadCompleteReceiver();
+            Uri uri = Uri
+                    .parse(versionUpdateInfo.url);
+            request = new DownloadManager.Request(uri);
+            request.setTitle(title);
+            request.setVisibleInDownloadsUi(true);
+            request.setDescription(description);
+            if (isOnlyWifi) {
+                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
+            }
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+            if (downloadFile == null) {
+                setSavePath(Environment.getExternalStorageDirectory() + "/" + title + ".apk");
+            }
+            request.setDestinationUri(Uri.fromFile(downloadFile));
+            myDownloadReference = downloadManager.enqueue(request);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            L.e(TAG, "下载失败");
+            return false;
+        }
+        return true;
+    }
+
+    private void showUpdateDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        if (versionUpdateInfo.isForce) {
+            builder.setCancelable(false);
+        } else {
+            builder.setCancelable(true)
+                    .setNegativeButton("暂不更新", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                            isShowDialog=false;
+                        }
+                    });
+        }
+
+        builder.setTitle("版本更新(V " + versionUpdateInfo.versionCode + ")")
+                .setMessage("更新说明：\n" + versionUpdateInfo.content)
+                .setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        download();
+                    }
+                })
+                .create()
+                .show();
+    }
+
+
+    private void registerDownloadCompleteReceiver() {
+        IntentFilter filter = new IntentFilter(
+                DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                long reference = intent.getLongExtra(
+                        DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+                if (myDownloadReference == reference) {
+                    Toast.makeText(context, downloadFinishHint, Toast.LENGTH_LONG).show();
+                    installAPK();
+                }
+            }
+        };
+        context.registerReceiver(receiver, filter);
+    }
+
+    /**
+     * 安装APK
+     */
+    private void installAPK() {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_VIEW);
+        String type = "application/vnd.android.package-archive";
+        intent.setDataAndType(Uri.fromFile(downloadFile), type);
+        context.startActivity(intent);
+    }
+
+    private int checkVersionUpdateInfo() {
+        if (versionUpdateInfo == null) {
+            return CHECKINFO_ERROR_UPDATEVERSIONINFO;
+        }
+        if (TextUtils.isEmpty(localVersionCode)) {
+            return CHECKINFO_ERROR_LOCAL_VERSION;
+        }
+        if (!localVersionCode.matches("^[1-9]+(\\.[0-9]+)*$")) {
+            return CHECKINFO_ERROR_LOCAL_VERSION;
+        }
+        if (TextUtils.isEmpty(versionUpdateInfo.versionCode)) {
+            return CHECKINFO_ERROR_UPDATEVERSIONINFO;
+        }
+        if (!versionUpdateInfo.versionCode.matches("^[1-9]+(\\.[0-9]+)*$")) {
+            return CHECKINFO_ERROR_UPDATEVERSIONINFO;
+        }
+        if (TextUtils.isEmpty(versionUpdateInfo.url)) {
+            return CHECKINFO_ERROR_UPDATEVERSIONINFO;
+        }
+        if (TextUtils.isEmpty(versionUpdateInfo.content)) {
+            versionUpdateInfo.content = "作者很懒，什么都没留下~";
+        }
+        return CHECKINFO_CORRECT;
+    }
+
+    /**
+     * 判断是否为最新版本方法
+     *
+     * @param localVersion  本地版本号
+     * @param onlineVersion 线上版本号
+     * @return
+     */
+    private boolean isAppNewVersion(String localVersion, String onlineVersion) {
+        if (localVersion.equals(onlineVersion)) {
+            return false;
+        }
+        ArrayList<String> localArray =new ArrayList( Arrays.asList(localVersion.split("\\.")));
+        ArrayList<String> onlineArray = new ArrayList( Arrays.asList(onlineVersion.split("\\.")));
+
+       // int length = localArray.length < onlineArray.length ? localArray.length : onlineArray.length;
+        int maxLength=Math.max( localArray.size() ,onlineArray.size());
+        int minLength=Math.min( localArray.size() ,onlineArray.size());
+
+        if(localArray.size()>onlineArray.size()){
+            for(int i=0;i<(maxLength-minLength);i++){
+                onlineArray.add("0");
+            }
+        }else{
+            for(int i=0;i<(maxLength-minLength);i++){
+                localArray.add("0");
+            }
+        }
+        for (int i = 0; i < maxLength; i++) {
+            if (Integer.parseInt(onlineArray.get(i)) > Integer.parseInt(localArray.get(i))) {
+                return true;
+            } else if (Integer.parseInt(onlineArray.get(i)) < Integer.parseInt(localArray.get(i))) {
+                return false;
+            }
+            // 相等 比较下一组值
+        }
+        return false;
+    }
+
+    public static class VersionUpdateInfo {
+        /**
+         * 版本号,格式：x.x.x.xxxxxx，如1.0.0或1.1或1.1.0.2365
+         */
+        public String versionCode;
+        /**
+         * 更新内容
+         */
+        public String content;
+
+        /**
+         * 下载链接
+         */
+        public String url;
+        /**
+         * 是否强制更新
+         */
+        public boolean isForce = false;
+    }
+
+}
