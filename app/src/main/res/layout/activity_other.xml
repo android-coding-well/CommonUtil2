@@ -9,4 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.gosuncn.cu.module.other.OtherActivity">
 
+    <com.gosuncn.core.widget.SegmentBar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:textArray="标签1|标签2|标签3"
+        app:defaultIndex="1"
+        app:padding="10dp"
+        />
+
 </RelativeLayout>

@@ -14,7 +14,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.gosuncn.core.utils.ActivityManagerUtil;
 import com.gosuncn.core.utils.L;
 
 
@@ -30,7 +29,6 @@ public  class BaseActivity extends AppCompatActivity {
         L.e("activity_lifecycle", this.getClass() + "  onCreate");
         super.onCreate(savedInstanceState);
         context = this;
-        ActivityManagerUtil.getInstance().pushActivity(this);
         initLoadingDialog();
         processExtraData();
     }
@@ -76,8 +74,6 @@ public  class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         L.e("activity_lifecycle", this.getClass() + "  onDestroy");
         cancelLoadingDialog();
-        ActivityManagerUtil.getInstance().popActivity(this);
-
     }
 
     @Override
