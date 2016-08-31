@@ -55,14 +55,14 @@ public class SegmentBar extends View {
 
     private void init(AttributeSet attrs, int defStyleAttr) {
         final TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.SegmentBar, defStyleAttr, 0);
-        normalColor = ta.getColor(R.styleable.SegmentBar_normalColor, normalColor);
-        focusColor = ta.getColor(R.styleable.SegmentBar_focusColor, focusColor);
-        textArray = ta.getString(R.styleable.SegmentBar_textArray);
-        textSize = (int) ta.getDimension(R.styleable.SegmentBar_textSize, textSize);
-        borderWidth = (int) ta.getDimension(R.styleable.SegmentBar_borderWidth, borderWidth);
-        padding = (int) ta.getDimension(R.styleable.SegmentBar_padding, padding);
-        cornerRadius = (int) ta.getDimension(R.styleable.SegmentBar_cornerRadius, cornerRadius);
-        currentItemIndex = ta.getInt(R.styleable.SegmentBar_defaultIndex, currentItemIndex);
+        normalColor = ta.getColor(R.styleable.SegmentBar_sbar_normalColor, normalColor);
+        focusColor = ta.getColor(R.styleable.SegmentBar_sbar_focusColor, focusColor);
+        textArray = ta.getString(R.styleable.SegmentBar_sbar_textArray);
+        textSize = (int) ta.getDimension(R.styleable.SegmentBar_sbar_textSize, textSize);
+        borderWidth = (int) ta.getDimension(R.styleable.SegmentBar_sbar_borderWidth, borderWidth);
+        padding = (int) ta.getDimension(R.styleable.SegmentBar_sbar_padding, padding);
+        cornerRadius = (int) ta.getDimension(R.styleable.SegmentBar_sbar_cornerRadius, cornerRadius);
+        currentItemIndex = ta.getInt(R.styleable.SegmentBar_sbar_defaultIndex, currentItemIndex);
         ta.recycle();
 
         if (TextUtils.isEmpty(textArray)) {
@@ -151,7 +151,7 @@ public class SegmentBar extends View {
             case MotionEvent.ACTION_UP:
                 int index = (int) ((event.getX() / width) * count);
                 if (listener != null) {
-                    listener.click(index);
+                    listener.onClick(index);
                 }
                 setCurrentItem(index);
                 break;
@@ -259,7 +259,7 @@ public class SegmentBar extends View {
          *
          * @param index
          */
-        void click(int index);
+        void onClick(int index);
     }
 
 }

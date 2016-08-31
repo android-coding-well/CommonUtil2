@@ -13,9 +13,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:textArray="标签1|标签2|标签3"
-        app:defaultIndex="1"
-        app:padding="10dp"
+        app:sbar_textArray="标签1|标签2|标签3"
+        app:sbar_defaultIndex="1"
+        app:sbar_padding="10dp"
         />
 
 </RelativeLayout>
