@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+    <!-- 半透明 -->
+    <color name="masking">#80000000</color>
+    <color name="masking_deep">#aa000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- LoadToast -->
+    <color name="color_accent">#7c4dff</color>
+    <color name="color_success">#3CCD88</color>
+    <color name="color_error">#f44336</color>
+
+    <!--灰度-->
+    <color name="gray_level_1">#383838</color>
+    <color name="gray_level_2">#555555</color>
+    <color name="gray_level_3">#848484</color>
+    <color name="gray_level_4">#ababab</color>
+    <color name="gray_level_5">#e3e3e3</color>
+    <color name="gray_level_6">#F4f4f4</color>
+
+
+    <!--以下命名和颜色值仅供参考，请不要修改此处-->
+    <color name="app_bg">#F4f4f4</color>
+    <color name="app_divide_line">#ababab</color>
+    <color name="app_title">#383838</color>
+    <color name="app_subtitle">#555555</color>
+    <color name="app_content">#848484</color>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_bg">#F4f4f4</color>
+    <color name="app_content">#848484</color>
+    <color name="app_divide_line">#ababab</color>
+    <color name="app_subtitle">#555555</color>
+    <color name="app_title">#383838</color>
+    <color name="black">#000000</color>
+    <color name="blue">#0000FF</color>
+    <color name="color_accent">#7c4dff</color>
+    <color name="color_error">#f44336</color>
+    <color name="color_success">#3CCD88</color>
+    <color name="gray_level_1">#383838</color>
+    <color name="gray_level_2">#555555</color>
+    <color name="gray_level_3">#848484</color>
+    <color name="gray_level_4">#ababab</color>
+    <color name="gray_level_5">#e3e3e3</color>
+    <color name="gray_level_6">#F4f4f4</color>
+    <color name="green">#00FF00</color>
+    <color name="masking">#80000000</color>
+    <color name="masking_deep">#aa000000</color>
+    <color name="red">#FF0000</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <declare-styleable name="CircleImageView"><attr format="dimension" name="border_width"/><attr format="color" name="border_color"/></declare-styleable>
+    <declare-styleable name="HorizontalListView"><attr format="dimension" name="dividerWidth"/><attr name="android:divider"/><attr name="android:requiresFadingEdge"/><attr name="android:fadingEdgeLength"/></declare-styleable>
+    <declare-styleable name="PercentLayout_Layout"><attr format="string" name="layout_widthPercent"/><attr format="string" name="layout_heightPercent"/><attr format="string" name="layout_marginPercent"/><attr format="string" name="layout_marginLeftPercent"/><attr format="string" name="layout_marginTopPercent"/><attr format="string" name="layout_marginRightPercent"/><attr format="string" name="layout_marginBottomPercent"/><attr format="string" name="layout_marginStartPercent"/><attr format="string" name="layout_marginEndPercent"/><attr format="string" name="layout_textSizePercent"/></declare-styleable>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="app_content">15sp</dimen>
+    <dimen name="app_content_min">12sp</dimen>
+    <dimen name="app_divide_line">0.5dp</dimen>
+    <dimen name="app_subtitle">16sp</dimen>
+    <dimen name="app_title">18sp</dimen>
+    <dimen name="app_top_title">20sp</dimen>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">AndroidUtils</string>
+    <string name="common_hint_unable_to_initialize">sorry,this cannot be instantiated</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_jackson">JacksonActivity</string>
+    <string name="title_activity_orm_lite">OrmLiteActivity</string>
+    <string name="title_activity_sweet_alert">SweetAlertActivity</string>
+    <string name="title_activity_volley">VolleyActivity</string>
+</resources>

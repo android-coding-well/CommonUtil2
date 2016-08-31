@@ -8,6 +8,7 @@ import com.gosuncn.cu.R;
 
 public class OtherActivity extends BaseActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,5 +16,7 @@ public class OtherActivity extends BaseActivity {
         showShortToast("屏幕宽高：" + getScreenWidth() + "*" + getScreenHeight());
         setContentView(R.layout.activity_other);
         VersionUpdateManager.getInstance().checkUpdateWithDialog(this);//测试版本更新
+
     }
+
 }

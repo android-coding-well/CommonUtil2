@@ -1,0 +1,3 @@
+//此处配置的是项目的Module，在这里冒号的意思与斜杠的意思类似，表示的是路径
+//如：':app'表示当前目录下的名为app的module
+include ':app', ':lib_common'

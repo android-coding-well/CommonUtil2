@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_list.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_list.xml"
+    },
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_filter_list.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_filter_list.xml"
+    },
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_edit.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_edit.xml"
+    },
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_menu.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_menu.xml"
+    },
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_check_circle_24dp.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_check_circle_24dp.xml"
+    },
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_done.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_done.xml"
+    },
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_add.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil2\\lib_common\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_add.xml"
+    }
+]

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SegmentBar">
+        <attr name="focusColor" format="color"></attr>
+        <attr name="normalColor" format="color"></attr>
+        <attr name="textArray" format="string"></attr>
+        <attr name="textSize" format="dimension"></attr>
+        <attr name="borderWidth" format="dimension"></attr>
+        <attr name="padding" format="dimension"></attr>
+        <attr name="cornerRadius" format="dimension"></attr>
+        <attr name="defaultIndex" format="integer"></attr>
+    </declare-styleable>
+</resources>

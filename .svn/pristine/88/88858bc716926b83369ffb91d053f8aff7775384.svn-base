@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil\\lib_common\\build\\intermediates\\res\\merged\\release\\menu\\menu_orm_lite.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil\\lib_common\\src\\main\\res\\menu\\menu_orm_lite.xml"
+    },
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil\\lib_common\\build\\intermediates\\res\\merged\\release\\menu\\menu_volley.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil\\lib_common\\src\\main\\res\\menu\\menu_volley.xml"
+    },
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil\\lib_common\\build\\intermediates\\res\\merged\\release\\menu\\menu_main.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil\\lib_common\\src\\main\\res\\menu\\menu_main.xml"
+    },
+    {
+        "merged": "F:\\AS_workspace3\\CommonUtil\\lib_common\\build\\intermediates\\res\\merged\\release\\menu\\menu_jackson.xml",
+        "source": "F:\\AS_workspace3\\CommonUtil\\lib_common\\src\\main\\res\\menu\\menu_jackson.xml"
+    }
+]

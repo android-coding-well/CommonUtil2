@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.databinding\library\1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="d985cdf99de8a63824b52d8a8efc309f9e5fbf01">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.databinding-library-1.1_481bab6a4e257ff88f4ee885a557131dd8a27244\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\design\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="fc29308a7a8f6d4407b34634eb48fb8b817f9b23">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.0.0_a88cb652ec2aab83e0c89be48519cbbfc567b8ef\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\logging-interceptor\3.3.1\99ce730034c6f5aaed710d1e0e9df95e8714ed5f\logging-interceptor-3.3.1.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="99ce730034c6f5aaed710d1e0e9df95e8714ed5f">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\logging-interceptor-3.3.1_5c7596066b595cbebb53c82d56c4eaef97f0c514\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="6599c608a16751d6461fdbc465a762dfed8556b5">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_22be46998a827b6b40d3ffacabc33da7b9ec63ef\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\5.1.1\b3652dfd65ca0bcf18790ff1a1f7624af4cb2bb8\butterknife-5.1.1.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="b3652dfd65ca0bcf18790ff1a1f7624af4cb2bb8">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\butterknife-5.1.1_2c8eb48bd5c3db7c321de772e2a79d2ee6bc5ee3\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="1a8ebb71d4137ae01af21cb5f0c8b76d39b97382">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_62ea64d7252cfa1459dc4190d254d31341fc0385\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.8.0\5ea7af56cc7c567ed9856d99efb30740e9b17ff\okio-1.8.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.8.0_9816b12f65c1dacee01b8b42f91096747a52894b\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\CommonUtil\lib_common\unspecified\jars\libs\thumbnailator-0.4.8.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="670900495202173cbeff5dce22cd48386b4c9e9f">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\8\thumbnailator-0.4.8_d17e8b6f8adc388e29bbb87cb6a03c0937575fcc\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-2.1.0_80c3d791f402449d6c43dac510e8d95f740a0c30\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="894922f67adeaaef51f077a29e315da21a3382d3">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.0.0_3abb7ec2412b5b759bc4fd8f6dff86b95d3ce89b\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\CommonUtil\lib_common\unspecified\jars\libs\ormlite-android-4.48.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="23b100ec735a8fe1e68cf836d5fec83d608fd8c6">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\8\ormlite-android-4.48_18f053e356fc4fa8a1967633c08a4ae5bd3a6dd5\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="e70f608219ed6b974644c333249ab2bb7b71de98">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.0.0_adf8fa96cd41e5ca1173af73d005b5dfab30a9ca\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.karumi\dexter\2.2.2\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="22bab473db1c258a4c7e8f0ae50c651e0de6b845">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.karumi-dexter-2.2.2_fbcb4131d34a9349848aaa1427a95584bd33f9df\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\libs\internal_impl-24.0.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.0.0_aa4ff8cc077e3c3b838c9dbfc15b23bb9ee0b84f\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\support-v13\24.0.0\jars\libs\internal_impl-24.0.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="61fd2644ca586288d0e733377d12b5f6da18c4ca">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.0.0_f8af970832848700aa0dc6fa3812233f37184eaa\classes.dex" />
+    </item>
+    <item
+        jar="E:\androidstudio\Android Studio\gradle\m2repository\com\android\databinding\baseLibrary\2.1.2\baseLibrary-2.1.2.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="357d1307d303c4771283372a53fd7c45e0c19c89">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\baseLibrary-2.1.2_5a717aea199cdff72d15e398ca7850d842ce2de2\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.1\19047bdb6a4fc00a44124f64ca98e88fc204e7e3\okhttp-3.3.1.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="19047bdb6a4fc00a44124f64ca98e88fc204e7e3">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.3.1_af78a400ba50d4154b1694ec4d4f865f58945d75\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\CommonUtil\lib_common\unspecified\jars\libs\ormlite-core-4.48.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="773f408f08a3b67da5a8afc03487f0dfb5d6e9d4">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\8\ormlite-core-4.48_9dfeb985bd1f1b956958ff8f1ac2917e06292a20\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.7.0_681b0583d2d388d78c462ca3946130eb85a7495f\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="031e8b3ab2df4ab43b1017f84417d7e10dfbb8d2">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\de.hdodenhof-circleimageview-2.0.0_7b46fe25d1f13c47a98cbf2870d8316e9e53a219\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\org.greenrobot\eventbus\3.0.0\ddd99896e9569eaababbe81b35d80e1b91c4ad85\eventbus-3.0.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="ddd99896e9569eaababbe81b35d80e1b91c4ad85">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\eventbus-3.0.0_7738624411eb0f2bc9b9d99c18b699c9d0b50552\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.1.6\2586312cd2b8a511e4c6236736f5a039fc0f2273\rxjava-1.1.6.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="2586312cd2b8a511e4c6236736f5a039fc0f2273">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\rxjava-1.1.6_9efdb45699f6ee9c409a93f5b04df5c5faed2621\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\io.reactivex\rxandroid\1.2.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\io.reactivex-rxandroid-1.2.1_8287a04e858db9f1fbe5747c175925c57d079198\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\cn.finalteam\toolsfinal\1.1.5\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="966da5b6a8bfdef0bfc660e349f8765dde5cb6f3">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\cn.finalteam-toolsfinal-1.1.5_7f5eec0bcec316433526254d3f897fb5ce83ed68\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\org.freemarker\freemarker\2.3.23\cd143cd8c02a9f838e3cb75a6dfe133750437f6d\freemarker-2.3.23.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="cd143cd8c02a9f838e3cb75a6dfe133750437f6d">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\freemarker-2.3.23_14b95425a42d1436c1033771030dc093f53930fe\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\javax.inject-1_043ea054306ded8dfd3d95aac0456fa1abc6aebf\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.wang.avi\library\1.0.5\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="5035aaf60d244038bb143ffad4fbb7cba92ecdc7">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.wang.avi-library-1.0.5_5b7f37b3720bf3ce23d9ae67140cf0b4c90cbed8\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-multidex-1.0.1_0664a65d169a3fdd0b59e521b019046a831d395c\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.google.dagger\dagger\2.4\6b290a792253035c9fcc912d6a4d7efb3e850211\dagger-2.4.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="6b290a792253035c9fcc912d6a4d7efb3e850211">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\dagger-2.4_f85531f47cb9065d9461d222fa37d944e462f208\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\adapter-rxjava\2.1.0\693eddc23e87ab13f9cf5001707ce8e7e1d1ff01\adapter-rxjava-2.1.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="693eddc23e87ab13f9cf5001707ce8e7e1d1ff01">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\adapter-rxjava-2.1.0_11702a6df0e75254e963dfee2297b8f0e783977c\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\24.0.0\2943c74db6d4346ab8c6531adac91fa05c137c40\support-annotations-24.0.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.0.0_5a70ef12cdca878bd86befed185de8629217cfe2\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="2f7e6e2dad1bccaf68a8820820adc6c0d5b96d37">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.0.0_1af96732f5c0ad2f450536d091d6c1eccc9b3e45\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\support-v13\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="c87270a9d828773c296fadde93e939c8190a6b1b">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v13-24.0.0_e2bc1c6960f31c7c03c6ce301a7df830cbc41632\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.tbruyelle.rxpermissions\rxpermissions\0.7.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="50fd38504119ea609c269abf98af75fb14e82f2c">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.tbruyelle.rxpermissions-rxpermissions-0.7.0_2bf30c766eea4f7319755a2e00f90cf9cb128105\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao\2.2.1\1aa64feab6440fff9a7fcfb1db1e6151d36d1254\greendao-2.2.1.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="1aa64feab6440fff9a7fcfb1db1e6151d36d1254">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\greendao-2.2.1_563da387d383f792af1f2a3a8768aed1927256ee\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.commit451\PhotoView\1.2.4\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="890be6e1e56a883c9b407a11e067a61886dec123">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.commit451-PhotoView-1.2.4_4bbd9cd316d821c515e52b2a43314ce7ea77b5be\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.7_26d379f1481f2a5c7cab8b611b575cd5bb3a1dc6\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao-generator\2.2.0\5b915c8048e21a27bd6e061490af62c017a7dcd\greendao-generator-2.2.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="05b915c8048e21a27bd6e061490af62c017a7dcd">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\greendao-generator-2.2.0_cf12b9d47081d65b182b0675afc55702b6131ff9\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="0874286cc2fd88d54fdf130e9d5372730da6de97">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.0.0_3bcd0863e4b79054d9fb9d833e0be3a9955148b5\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\library-2.4.0_0958632a693255632e0edbf38fd695d8f2837001\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.databinding\adapters\1.1\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="3cae403175958af8baa00bed0bd6e04187d69415">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.databinding-adapters-1.1_2a63cd14a2efb2031ab1b42a6e288184c2e8a198\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hwj\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.1.0_c42063f5b0a11adf26bae9f651660a5dd1113307\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="3bd97cfefd783e9de1dd1c30574a6adb44b4409b">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.0.0_320864bf75b80ca97a564746079ce7a344fe0baf\classes.dex" />
+    </item>
+    <item
+        jar="F:\AS_workspace3\CommonUtil\app\build\intermediates\exploded-aar\cn.finalteam\galleryfinal\1.4.8.7\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.0"
+        sha1="c74f0952cfb481882d8cedf4ca9f3c60289a3301">
+        <dex dex="F:\AS_workspace3\CommonUtil\app\build\intermediates\transforms\dex\debug\folders\1000\10\cn.finalteam-galleryfinal-1.4.8.7_a306c01a76d8ba3ef79a8bedcfc6c53316107764\classes.dex" />
+    </item>
+
+</items>
