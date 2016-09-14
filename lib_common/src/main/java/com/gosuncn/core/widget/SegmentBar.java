@@ -173,6 +173,14 @@ public class SegmentBar extends View {
     }
 
     /**
+     * 返回当前选中标签下标
+     * @return 未选中则为-1
+     */
+    public int getCurrentItem() {
+       return currentItemIndex;
+    }
+
+    /**
      * 设置标签数组
      * @param texts
      */

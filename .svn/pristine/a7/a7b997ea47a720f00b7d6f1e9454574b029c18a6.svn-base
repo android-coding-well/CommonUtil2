@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SegmentBar">
+        <attr name="sbar_focusColor" format="color"></attr>
+        <attr name="sbar_normalColor" format="color"></attr>
+        <attr name="sbar_textArray" format="string"></attr>
+        <attr name="sbar_textSize" format="dimension"></attr>
+        <attr name="sbar_borderWidth" format="dimension"></attr>
+        <attr name="sbar_padding" format="dimension"></attr>
+        <attr name="sbar_cornerRadius" format="dimension"></attr>
+        <attr name="sbar_defaultIndex" format="integer"></attr>
+    </declare-styleable>
+</resources>

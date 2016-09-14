@@ -152,6 +152,23 @@ public class VersionUpdateManager {
         this.localVersionCode = code;
     }
 
+
+    /**
+     * 是否显示对话框
+     * @return
+     */
+    public boolean isShowDialog() {
+        return isShowDialog;
+    }
+
+    /**
+     * 设置是否显示对话框
+     * @param showDialog
+     */
+    public void setShowDialog(boolean showDialog) {
+        isShowDialog = showDialog;
+    }
+
     /**
      * 停止下载
      */
@@ -248,6 +265,9 @@ public class VersionUpdateManager {
 
         } catch (Exception e) {
             e.printStackTrace();
+            if(isShowDialog){
+                Toast.makeText(context, "下载失败", Toast.LENGTH_SHORT).show();
+            }
             L.e(TAG, "下载失败");
             return false;
         }
@@ -377,14 +397,13 @@ public class VersionUpdateManager {
 
     public static class VersionUpdateInfo {
         /**
-         * 版本号,格式：x.x.x.xxxxxx，如1.0.0或1.1或1.1.0.2365
+         * 服务器上的版本号,格式：x.x.x.xxxxxx，如1.0.0或1.1或1.1.0.2365
          */
         public String versionCode;
         /**
          * 更新内容
          */
         public String content;
-
         /**
          * 下载链接
          */

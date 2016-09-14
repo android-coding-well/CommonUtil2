@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportHeight="24.0"
+    android:viewportWidth="24.0">
+    <!--水平线-->
+    <path
+        android:pathData="H24"
+        android:strokeColor="#00ffff"
+        android:strokeWidth="0.1" />
+    <path
+        android:pathData="V24"
+        android:strokeColor="#00ffff"
+        android:strokeWidth="0.1" />
+    <path
+        android:pathData="L24,24"
+        android:strokeColor="#00ffff"
+        android:strokeWidth="0.1" />
+    <path
+        android:pathData="M24,24 L0,24"
+        android:strokeColor="#ff0000"
+        android:strokeWidth="0.1" />
+    <path
+        android:pathData="M24,0 L24,24"
+        android:strokeColor="#ff0000"
+        android:strokeWidth="0.1" />
+
+    <path
+        android:fillColor="#ff00ff"
+        android:pathData="L0,3 L3,3 Z"
+        android:strokeColor="#ff0000"
+        android:strokeWidth="0.01" />
+
+    <path
+        android:pathData="C0,0 3,3 6,0"
+        android:strokeColor="#ff0000"
+        android:strokeWidth="0.1" />
+
+    <!--A rx,ry x-axis-rotation large-arc-flag,sweepflag x,y
+    rx ry 椭圆半径
+x-axis-rotation x轴旋转角度
+large-arc-flag 为0时表示取小弧度，1时取大弧度（要长的还是短的）
+sweep-flag 0取逆时针方向，1取顺时针方向
+x,y (dx,dy) 终点的位置-->
+    <path
+        android:pathData="A6,12 0 0,1 12,12"
+        android:strokeColor="#ffdd00"
+        android:strokeWidth="0.1" />
+    <!--<path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M3,17.25V21h3.75L17.81,9.94l-3.75,-3.75L3,17.25zM20.71,7.04c0.39,-0.39 0.39,-1.02 0,-1.41l-2.34,-2.34c-0.39,-0.39 -1.02,-0.39 -1.41,0l-1.83,1.83 3.75,3.75 1.83,-1.83z" />
+    <path
+        android:fillColor="#ff0000"
+        android:pathData="M 0,0 L 24,24 M 0,0 V 24 M 0,0 H 24Z"
+        android:strokeColor="#00ff00"
+        android:strokeWidth="0.1" />
+    <path
+        android:strokeColor="#00ffff"
+        android:pathData=" c 0,0,0,24,24,24c 0,0,24,0,24,24"
+        android:strokeWidth="0.1" />-->
+
+</vector>

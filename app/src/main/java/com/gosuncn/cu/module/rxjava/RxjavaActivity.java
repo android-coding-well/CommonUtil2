@@ -290,8 +290,9 @@ public class RxjavaActivity extends BaseActivity {
 
         //PublishSubject相当于一个管道，数据从一边进马上从一边出，debounce则是去抖动，意思是在规定的时间之后订阅者才能收到信息
         PublishSubject publishSubject = PublishSubject.create();
-        publishSubject.onNext("");//可用于点击事件，防止多次点击
-        publishSubject.debounce(400, TimeUnit.MILLISECONDS)
+        publishSubject.onNext("");//
+        publishSubject.debounce(400, TimeUnit.MILLISECONDS)//400毫秒内的数据只发送最后一次，可用于搜索框
+                //.throttleFirst(400, TimeUnit.MILLISECONDS)//400毫秒内的数据只发送第一次，可用于防止view的多次点击
                 .subscribe(new Subscriber<Object>() {
                     @Override
                     public void onCompleted() {
