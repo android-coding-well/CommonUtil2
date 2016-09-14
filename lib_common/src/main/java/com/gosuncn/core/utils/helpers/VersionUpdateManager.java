@@ -1,4 +1,4 @@
-package com.gosuncn.core.utils.helpers;
+﻿package com.gosuncn.core.utils.helpers;
 
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
@@ -203,7 +203,9 @@ public class VersionUpdateManager {
                 }
                 return CHECKUPDATE_NEED;
             } else {
-                //Toast.makeText(context, "已是最新版", Toast.LENGTH_SHORT).show();
+               // if(isShowDialog) {
+                   // Toast.makeText(context, "已是最新版", Toast.LENGTH_SHORT).show();
+               // }
                 return CHECKUPDATE_LATEST;
             }
         } else {
@@ -294,6 +296,9 @@ public class VersionUpdateManager {
                 .setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+		if(isShowDialog){
+                	Toast.makeText(context, "正在下载，请勿重复更新", Toast.LENGTH_SHORT).show();
+            	}
                         download();
                     }
                 })
