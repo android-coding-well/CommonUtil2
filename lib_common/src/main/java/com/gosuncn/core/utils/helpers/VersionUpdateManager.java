@@ -1,4 +1,4 @@
-﻿package com.gosuncn.core.utils.helpers;
+package com.gosuncn.core.utils.helpers;
 
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
@@ -19,6 +19,7 @@ import com.gosuncn.core.utils.L;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 /**
  * 版本更新管理器（只支持版本号为x.x.x.xxxxxx的格式，如1.0或1.0.3.21等）
  * <p>
@@ -57,7 +58,7 @@ public class VersionUpdateManager {
     private boolean isOnlyWifi = false;
     private File downloadFile;
     private long myDownloadReference;
-    private boolean isShowDialog=true;
+    private boolean isShowDialog = true;
     private static VersionUpdateManager instance;
 
     private VersionUpdateManager() {
@@ -74,6 +75,7 @@ public class VersionUpdateManager {
 
     /**
      * 初始化，建议放置在Appliaction
+     *
      * @param context
      */
     public void init(Context context) {
@@ -155,6 +157,7 @@ public class VersionUpdateManager {
 
     /**
      * 是否显示对话框
+     *
      * @return
      */
     public boolean isShowDialog() {
@@ -163,6 +166,7 @@ public class VersionUpdateManager {
 
     /**
      * 设置是否显示对话框
+     *
      * @param showDialog
      */
     public void setShowDialog(boolean showDialog) {
@@ -197,15 +201,15 @@ public class VersionUpdateManager {
     private int checkUpdate(Context context, boolean dialog) {
         int code = checkVersionUpdateInfo();
         if (code == CHECKINFO_CORRECT) {
-            if (isAppNewVersion(localVersionCode,versionUpdateInfo.versionCode)) {//需要更新
+            if (isAppNewVersion(localVersionCode, versionUpdateInfo.versionCode)) {//需要更新
                 if (dialog) {
                     showUpdateDialog(context);
                 }
                 return CHECKUPDATE_NEED;
             } else {
-               // if(isShowDialog) {
-                   // Toast.makeText(context, "已是最新版", Toast.LENGTH_SHORT).show();
-               // }
+                // if(isShowDialog) {
+                // Toast.makeText(context, "已是最新版", Toast.LENGTH_SHORT).show();
+                // }
                 return CHECKUPDATE_LATEST;
             }
         } else {
@@ -226,6 +230,7 @@ public class VersionUpdateManager {
 
     /**
      * 强制检查更新（无论如何都会弹出对话框）
+     *
      * @param context
      * @return
      */
@@ -267,7 +272,7 @@ public class VersionUpdateManager {
 
         } catch (Exception e) {
             e.printStackTrace();
-            if(isShowDialog){
+            if (isShowDialog) {
                 Toast.makeText(context, "下载失败", Toast.LENGTH_SHORT).show();
             }
             L.e(TAG, "下载失败");
@@ -276,7 +281,7 @@ public class VersionUpdateManager {
         return true;
     }
 
-    private void showUpdateDialog(Context context) {
+    private void showUpdateDialog(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         if (versionUpdateInfo.isForce) {
             builder.setCancelable(false);
@@ -286,7 +291,7 @@ public class VersionUpdateManager {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.cancel();
-                            isShowDialog=false;
+                            isShowDialog = false;
                         }
                     });
         }
@@ -296,9 +301,9 @@ public class VersionUpdateManager {
                 .setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-		if(isShowDialog){
-                	Toast.makeText(context, "正在下载，请勿重复更新", Toast.LENGTH_SHORT).show();
-            	}
+                        if (isShowDialog) {
+                            Toast.makeText(context, "正在下载，请勿重复更新", Toast.LENGTH_SHORT).show();
+                        }
                         download();
                     }
                 })
@@ -373,19 +378,19 @@ public class VersionUpdateManager {
         if (localVersion.equals(onlineVersion)) {
             return false;
         }
-        ArrayList<String> localArray =new ArrayList( Arrays.asList(localVersion.split("\\.")));
-        ArrayList<String> onlineArray = new ArrayList( Arrays.asList(onlineVersion.split("\\.")));
+        ArrayList<String> localArray = new ArrayList(Arrays.asList(localVersion.split("\\.")));
+        ArrayList<String> onlineArray = new ArrayList(Arrays.asList(onlineVersion.split("\\.")));
 
-       // int length = localArray.length < onlineArray.length ? localArray.length : onlineArray.length;
-        int maxLength=Math.max( localArray.size() ,onlineArray.size());
-        int minLength=Math.min( localArray.size() ,onlineArray.size());
+        // int length = localArray.length < onlineArray.length ? localArray.length : onlineArray.length;
+        int maxLength = Math.max(localArray.size(), onlineArray.size());
+        int minLength = Math.min(localArray.size(), onlineArray.size());
 
-        if(localArray.size()>onlineArray.size()){
-            for(int i=0;i<(maxLength-minLength);i++){
+        if (localArray.size() > onlineArray.size()) {
+            for (int i = 0; i < (maxLength - minLength); i++) {
                 onlineArray.add("0");
             }
-        }else{
-            for(int i=0;i<(maxLength-minLength);i++){
+        } else {
+            for (int i = 0; i < (maxLength - minLength); i++) {
                 localArray.add("0");
             }
         }
