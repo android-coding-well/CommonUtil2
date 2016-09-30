@@ -19,4 +19,4 @@ dependencies {
 	        compile 'com.github.huweijian5:CommonUtil2:latest_version'
 }
 ```
-* 其中latest_version请到releases中查看
+* 其中latest_version请到[releases](https://github.com/huweijian5/CommonUtil2/releases)中查看
