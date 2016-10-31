@@ -15,12 +15,16 @@ import com.gosuncn.core.R;
 
 
 /**
+ * 推荐使用RecyclerViewExtend代替ListView，GridView
+ *
  * 继承自SwipeRefreshLayout,从而实现滑动到底部时上拉加载更多的功能.
  *
  * 使用须知：由于  ListView.removeFooterView此方法中有以下的强转
  * if (mAdapter != null && ((HeaderViewListAdapter) mAdapter).removeFooter(v))
  * 因此在使用的时候必须在ListView setAdapter之前调用addFooterView,如ListView.addFooterView(RefreshLayout.getFooterView());
  */
+
+@Deprecated
 public class RefreshLayout extends SwipeRefreshLayout implements AbsListView.OnScrollListener {
 
     /**

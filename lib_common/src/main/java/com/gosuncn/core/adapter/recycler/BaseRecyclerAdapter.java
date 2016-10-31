@@ -16,10 +16,11 @@ import java.util.List;
  * @param <T>
  */
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
-
+    private static final String TAG = "BaseRecyclerAdapter";
     public Context context;
     public List<T> list;
     private OnItemClickListener mOnItemClickLitener;
+    private OnItemLongClickListener mOnItemLongClickLitener;
 
     public BaseRecyclerAdapter(Context context, @NonNull List<T> list) {
         this.context = context.getApplicationContext();
@@ -33,6 +34,15 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
      */
     public void setOnItemClickLitener(OnItemClickListener mOnItemClickLitener) {
         this.mOnItemClickLitener = mOnItemClickLitener;
+    }
+
+    /**
+     * 设置监听器
+     *
+     * @param mOnItemLongClickLitener
+     */
+    public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickLitener) {
+        this.mOnItemLongClickLitener = mOnItemLongClickLitener;
     }
 
     /**
@@ -72,12 +82,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
                     mOnItemClickLitener.onItemClick(holder.itemView, pos);
                 }
             });
-
+        }
+        if (mOnItemLongClickLitener != null) {
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemLongClick(holder.itemView, pos);
+                    mOnItemLongClickLitener.onItemLongClick(holder.itemView, pos);
                     return false;
                 }
             });

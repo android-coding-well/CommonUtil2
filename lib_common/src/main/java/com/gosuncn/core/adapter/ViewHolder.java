@@ -20,7 +20,9 @@ import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 
-public class ViewHolder {
+;
+
+public class ViewHolder  {
 
 	
 	private View convertView;

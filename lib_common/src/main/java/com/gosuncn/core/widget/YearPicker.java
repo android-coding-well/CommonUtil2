@@ -21,7 +21,7 @@ import com.gosuncn.core.R;
 import java.util.Calendar;
 
 /**
- * Created by HWJ on 2016/9/4.
+ * 年份选择器
  */
 public class YearPicker extends View {
 

@@ -91,6 +91,21 @@
             android:onClick="onOtherClick"
             android:text="other"
             android:textAllCaps="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="onRecyclerClick"
+            android:text="recyclerview"
+            android:textAllCaps="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="onAutocompleteClick"
+            android:text="AutoCompleteTextView"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </ScrollView>

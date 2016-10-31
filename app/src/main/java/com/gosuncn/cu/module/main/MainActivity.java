@@ -13,9 +13,11 @@ import com.gosuncn.cu.module.dagger2.Dagger2Activity;
 import com.gosuncn.cu.module.databinding.DataBindingActivity;
 import com.gosuncn.cu.module.greendao.activity.GreenDaoActivity;
 import com.gosuncn.cu.module.image.ImageActivity;
+import com.gosuncn.cu.module.other.AutoRecordActivity;
 import com.gosuncn.cu.module.other.OtherActivity;
 import com.gosuncn.cu.module.other.TestActivity;
 import com.gosuncn.cu.module.permission.activity.PermissionActivity;
+import com.gosuncn.cu.module.recyclerview.RecyclerActivity;
 import com.gosuncn.cu.module.retrofit.RetrofitActivity;
 import com.gosuncn.cu.module.rxjava.RxjavaActivity;
 
@@ -109,4 +111,11 @@ public class MainActivity extends BaseActivity {
         gotoActivity(OtherActivity.class);
     }
 
+    public void onRecyclerClick(View view) {
+        gotoActivity(RecyclerActivity.class);
+    }
+
+    public void onAutocompleteClick(View view) {
+        gotoActivity(AutoRecordActivity.class);
+    }
 }
