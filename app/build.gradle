@@ -106,5 +106,5 @@ dependencies {
     //允许时权限管理https://github.com/tbruyelle/RxPermissions
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
 
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
 }
