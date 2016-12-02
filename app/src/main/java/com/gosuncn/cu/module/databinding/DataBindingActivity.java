@@ -6,9 +6,9 @@ import android.os.Handler;
 
 import com.gosuncn.core.base.BaseActivity;
 import com.gosuncn.cu.R;
-import com.gosuncn.cu.databinding.ActivityDatabindingBinding;
 import com.gosuncn.cu.bean.databinding.User;
 import com.gosuncn.cu.bean.databinding.User2;
+import com.gosuncn.cu.databinding.ActivityDatabindingBinding;
 
 /**
  * 使用databinding前，在build.gradle中配置
@@ -30,12 +30,14 @@ public class DataBindingActivity extends BaseActivity {
         //ActivityDatabindingBinding类是自动生成的，命名规则是布局文件名+后缀Binding,如R.layout.activity_main就是ActivityMainBinding
         final ActivityDatabindingBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_databinding);
 
+
         user = new User();
         user2 = new User2();
         user.name.set("我是张三");
         user2.setName("我是张三");
         binding.setUser(user);
         binding.setUser2(user2);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

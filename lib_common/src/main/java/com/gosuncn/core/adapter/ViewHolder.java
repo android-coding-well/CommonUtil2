@@ -20,8 +20,7 @@ import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 
-;
-
+@Deprecated
 public class ViewHolder  {
 
 	

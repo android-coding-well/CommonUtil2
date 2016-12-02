@@ -1,0 +1,39 @@
+package com.gosuncn.cu.module.other;
+
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.widget.ImageView;
+
+import com.gosuncn.core.base.BaseActivity;
+import com.gosuncn.core.utils.BitmapUtil;
+import com.gosuncn.core.utils.helpers.VersionUpdateManager;
+import com.gosuncn.cu.R;
+
+public class OtherActivity extends BaseActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setFullScreen();//测试全屏
+        showShortToast("屏幕宽高：" + getScreenWidth() + "*" + getScreenHeight());
+        setContentView(R.layout.activity_other);
+        VersionUpdateManager.getInstance().checkUpdateWithDialog(this);//测试版本更新
+
+        testMergeBitmap();
+
+
+    }
+
+    private void testMergeBitmap() {
+        ImageView img=(ImageView) findViewById(R.id.iv_img);
+        ImageView img2=(ImageView) findViewById(R.id.iv_img2);
+        ImageView preview=(ImageView) findViewById(R.id.iv_preview);
+        Bitmap bitmap=((BitmapDrawable)img.getDrawable()).getBitmap();
+        Bitmap bitmap2=((BitmapDrawable)img2.getDrawable()).getBitmap();
+
+        preview.setImageBitmap(BitmapUtil.mergeBitmap(bitmap,bitmap2));
+    }
+
+}

@@ -2,6 +2,7 @@ package com.gosuncn.core.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.media.ThumbnailUtils;
@@ -162,7 +163,49 @@ public class BitmapUtil {
             }
         }
     }
+    /**
+     * 合并两种Bitmap，合并后会以宽度较小者作为输出尺寸
+     * @param background 作为背景
+     * @param foreground 作为前景
+     * @return
+     */
+    public static  Bitmap mergeBitmap(Bitmap background, Bitmap foreground) {
+        if( background == null ||foreground==null) {
+            return null;
+        }
 
+        int bgWidth = background.getWidth();
+        int bgHeight = background.getHeight();
+        int fgWidth = foreground.getWidth();
+        int fgHeight = foreground.getHeight();
+        int newWidth;
+        int newHeight;
+
+        //缩放到原始尺寸较小的尺寸
+        if(bgWidth>fgWidth){
+            //创建所需尺寸居中缩放的位图
+            background = ThumbnailUtils.extractThumbnail(background, fgWidth, fgHeight);
+            newWidth=fgWidth;
+            newHeight=fgHeight;
+        }else{
+            foreground = ThumbnailUtils.extractThumbnail(foreground, bgWidth, bgHeight);
+            newWidth=bgWidth;
+            newHeight=bgHeight;
+        }
+
+        Bitmap newbmp = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+        Canvas cv = new Canvas(newbmp);
+        //draw bg into
+        cv.drawBitmap(background, 0, 0, null);//在 0，0坐标开始画入bg
+        //draw fg into
+        cv.drawBitmap(foreground, 0, 0, null);//在 0，0坐标开始画入fg ，可以从任意位置画入
+        //save all clip
+        cv.save(Canvas.ALL_SAVE_FLAG);//保存
+        //store
+        cv.restore();//存储
+
+        return newbmp;
+    }
 
     /**
      * 保存Bitmap到本地

@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.gosuncn.core.base.BaseActivity;
 import com.gosuncn.core.utils.L;
+import com.gosuncn.core.utils.helpers.LogcatHelper;
 import com.gosuncn.cu.R;
 import com.gosuncn.cu.module.animview.AnimViewActivity;
 import com.gosuncn.cu.module.annotation.AnnotationActivity;
@@ -27,6 +28,13 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        LogcatHelper.getInstance(this).setMaxStorageSize(10,LogcatHelper.UNIT_KB).start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        LogcatHelper.getInstance(this).stop();
+        super.onDestroy();
     }
 
     @Override

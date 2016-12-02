@@ -11,10 +11,12 @@ import java.util.List;
 /**
  * 通用Adapter
  * 内部封装了ViewHolder，只需继承并实现抽象方法即可
- *
+ * 请使用com.gosuncn.core.adapter.common.CommonAdapter代替
  * @param <T>
  * @author HWJ
  */
+
+@Deprecated
 public abstract class CommonAdapter<T> extends BaseAdapter {
 
     protected List<T> list;

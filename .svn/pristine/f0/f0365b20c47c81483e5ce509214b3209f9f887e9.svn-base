@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="java.util.HashMap" />
+
+        <variable
+            name="user"
+            type="com.gosuncn.cu.bean.databinding.User" />
+
+        <variable
+            name="user2"
+            type="com.gosuncn.cu.bean.databinding.User2" />
+
+        <variable
+            name="num"
+            type="int" />
+
+        <variable
+            name="map"
+            type="HashMap&lt;String,String>" />
+    </data>
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".module.main.MainActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.name}"
+            tools:text="123"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user2.name}" />
+    </LinearLayout>
+</layout>

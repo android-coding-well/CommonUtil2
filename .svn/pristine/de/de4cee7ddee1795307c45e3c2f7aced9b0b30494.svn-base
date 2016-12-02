@@ -1,0 +1,120 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.huweijian5'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '24.0.0'
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 5
+        versionName "2.0"
+
+        /*multiDexEnabled true // dex突破65535的限制*/
+        /*signingConfig signingConfigs.release //设置默认的签名配置*/
+    }
+
+    /*//生成指定的so目录，避免出现找不到class的异常
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi'
+            universalApk false
+        }
+    }*/
+
+    /*//执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉。
+    lintOptions {
+        abortOnError false
+    }*/
+
+    /*//重命名生成的apk
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(output.outputFile.parent, defaultConfig.applicationId + "-" + buildType.name + "-v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk");
+        }
+    }*/
+
+    /*//解决内存溢出
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }*/
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+    buildTypes {
+        release {
+            /* buildConfigField "boolean", "LOG_DEBUG", "false" // 显示Log,此属性可在BuildConfig中找到，获取值后可以控制日志的输出与否*/
+           /* zipAlignEnabled true//zip 优化*/
+
+            minifyEnabled false  //是否进行混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        /*debug{
+            shrinkResources false//是否剔除无用资源
+        }*/
+
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    //图片加载
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    //进度动画AVLoadingIndicatorView:https://github.com/81813780/AVLoadingIndicatorView
+    compile 'com.wang.avi:library:1.0.5'
+    compile 'com.nineoldandroids:library:2.4.0'
+
+   /* //网络请求库
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+
+    //链式编程
+    compile 'io.reactivex:rxjava:1.1.6'
+    compile 'io.reactivex:rxandroid:1.2.1'
+
+    //图片缩放
+    compile 'com.commit451:PhotoView:1.2.4'
+
+    //事件总线
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+    //进度动画AVLoadingIndicatorView:https://github.com/81813780/AVLoadingIndicatorView
+    compile 'com.wang.avi:library:1.0.5'
+    compile 'com.nineoldandroids:library:2.4.0'
+
+    //图片加载
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    //圆形图片 https://github.com/hdodenhof/CircleImageView
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+
+    //拍照，图片单选多选裁剪旋转，详情戳这里：https://github.com/pengjianbo/GalleryFinal
+    compile 'cn.finalteam:galleryfinal:1.4.8.7'
+
+    //数据库
+    compile 'org.greenrobot:greendao:2.2.1'
+    compile 'org.greenrobot:greendao-generator:2.2.0'
+
+    //允许时权限管理https://github.com/tbruyelle/RxPermissions
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'*/
+
+    //自定义漂亮按钮 按钮内可加图标，可不写xml设置按住背景  具体属性 https://github.com/medyo/fancybuttons
+    compile 'com.github.medyo:fancybuttons:1.8.1'
+
+}

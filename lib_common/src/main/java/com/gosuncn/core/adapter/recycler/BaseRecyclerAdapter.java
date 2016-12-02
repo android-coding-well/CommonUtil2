@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,15 +17,23 @@ import java.util.List;
  * @param <T>
  */
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
+
+
+    public interface  OnItemClickListener<T> {
+        void  onItemClick(View v, int position, T t);
+    }
+    public interface OnItemLongClickListener<T> {
+        void onItemLongClick(View v, int position, T t);
+    }
+
     private static final String TAG = "BaseRecyclerAdapter";
     public Context context;
-    public List<T> list;
-    private OnItemClickListener mOnItemClickLitener;
-    private OnItemLongClickListener mOnItemLongClickLitener;
+    public List<T> list = new ArrayList<T>();
+    private OnItemClickListener<T> mOnItemClickLitener;
+    private OnItemLongClickListener<T> mOnItemLongClickLitener;
 
-    public BaseRecyclerAdapter(Context context, @NonNull List<T> list) {
+    public BaseRecyclerAdapter(Context context) {
         this.context = context.getApplicationContext();
-        this.list = list;
     }
 
     /**
@@ -32,7 +41,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
      *
      * @param mOnItemClickLitener
      */
-    public void setOnItemClickLitener(OnItemClickListener mOnItemClickLitener) {
+    public void setOnItemClickLitener(OnItemClickListener<T> mOnItemClickLitener) {
         this.mOnItemClickLitener = mOnItemClickLitener;
     }
 
@@ -41,7 +50,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
      *
      * @param mOnItemLongClickLitener
      */
-    public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickLitener) {
+    public void setOnItemLongClickListener(OnItemLongClickListener<T> mOnItemLongClickLitener) {
         this.mOnItemLongClickLitener = mOnItemLongClickLitener;
     }
 
@@ -71,15 +80,15 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
-
-        convert(holder, position, list.get(position));
+        final T t = list.get(position);
+        convert(holder, position,  t);
         // 如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemClick(holder.itemView, pos);
+                    mOnItemClickLitener.onItemClick(holder.itemView, pos,t);
                 }
             });
         }
@@ -88,7 +97,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
                 @Override
                 public boolean onLongClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mOnItemLongClickLitener.onItemLongClick(holder.itemView, pos);
+                    mOnItemLongClickLitener.onItemLongClick(holder.itemView, pos,t);
                     return false;
                 }
             });
@@ -100,5 +109,24 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         return list == null ? 0 : list.size();
     }
 
+
+    public void addAllData(@NonNull List<T> list) {
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void addData(@NonNull T t) {
+        this.list.add(t);
+        notifyDataSetChanged();
+    }
+
+    public void clearData() {
+        this.list.clear();
+        notifyDataSetChanged();
+    }
+
+    public List<T> getData(){
+        return this.list;
+    }
 
 }

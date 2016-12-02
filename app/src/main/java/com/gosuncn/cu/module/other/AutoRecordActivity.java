@@ -8,6 +8,9 @@ import android.view.View;
 import com.gosuncn.cu.R;
 import com.gosuncn.cu.databinding.ActivityAutoRecordBinding;
 
+/**
+ * AutoCompleteTextViewExtend演示
+ */
 public class AutoRecordActivity extends AppCompatActivity {
 
     ActivityAutoRecordBinding binding;

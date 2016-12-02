@@ -107,4 +107,10 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
 
     //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    //自定义漂亮按钮 按钮内可加图标，可不写xml设置按住背景  具体属性 https://github.com/medyo/fancybuttons
+    compile 'com.github.medyo:fancybuttons:1.8.2'
+
+    //进度动画AVLoadingIndicatorView:https://github.com/81813780/AVLoadingIndicatorView
+    compile 'com.wang.avi:library:1.0.5'
+
 }

@@ -1,11 +1,8 @@
 package com.gosuncn.core.adapter.recycler;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
@@ -14,8 +11,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
-import com.bumptech.glide.Glide;
 
 /**
  * 与BaseRecyclerAdapter配合使用
@@ -165,33 +160,6 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     public RecyclerViewHolder setImageURI(int viewId,Uri uri){
         ImageView iv=getView(viewId);
         iv.setImageURI(uri);
-        return this;
-    }
-
-    /**
-     * 网络加载图片
-     * @param viewId
-     * @param context
-     * @param uri               图片的网络地址
-     * @param defResourceId     默认显示的图片
-     * @return
-     */
-    public RecyclerViewHolder displayImage(@IdRes int viewId, Context context, String uri, @DrawableRes int defResourceId){
-        displayImage(viewId,context,uri,defResourceId,defResourceId);
-        return this;
-    }
-
-    /**
-     * 网络加载图片
-     * @param viewId
-     * @param context
-     * @param uri                   图片的网络地址
-     * @param defResourceId         默认显示的图片
-     * @param placeResourceRes      占位图
-     * @return
-     */
-    public RecyclerViewHolder displayImage(@IdRes  int viewId,Context context,String uri,@DrawableRes  int defResourceId,@DrawableRes  int placeResourceRes){
-        Glide.with(context).load(uri).placeholder(defResourceId).error(defResourceId).into((ImageView)getView(viewId));
         return this;
     }
 }
